@@ -15,7 +15,7 @@ router.get('/reset-password', pageController.getResetPasswordPage);
 
 router.post('/login/login-user', authController.loginUser);
 router.post('/registration/register-user', authController.registerUser);
-
+router.get('/logout', authController.logout)
 
 router.post('/menu/delete-dish', menuController.deleteDish);
 module.exports = router;

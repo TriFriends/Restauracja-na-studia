@@ -10,7 +10,11 @@ const PORT = 3000;
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
-app.engine('hbs', hbs({ defaultLayout: 'main.hbs' }));
+app.engine('hbs', hbs({
+    defaultLayout: 'main.hbs',
+    extname: '.hbs',
+    partialsDir: "views/partials",
+}));
 app.set('view engine', 'hbs');
 
 
@@ -26,6 +30,11 @@ app.use(express.static('static'));
 
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.isLogged = req.session.isLogged;
+    res.locals.name = req.session.name;
+    next();
+});
 const routes = require('./routes/routes')
 app.use('/', routes);
 

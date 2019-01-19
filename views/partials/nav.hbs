@@ -1,0 +1,13 @@
+<nav>
+    <a href="/">Home</a>
+    <a href="/menu">menu</a>
+    <a href="/book-table">reserwuj stolik</a>
+    <a href="/takeaway">Zamów do domu</a>
+
+    {{#if isLogged}}
+    {{name}}
+    <a href="/logout">Wyloguj się</a>
+    {{else}}
+    <a href="/login">Zaloguj sie</a>
+    {{/if}}
+</nav>
