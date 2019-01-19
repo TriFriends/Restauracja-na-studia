@@ -1,0 +1,16 @@
+Zaloguj sie
+<form action="/login/login-user" method="POST">
+    <input type="text" name="mail">
+    <input type="text" name="password">
+
+    <input type="submit">
+
+</form>
+{{#if error}}
+{{error}}
+{{/if}}
+{{#if accountCreated}}
+{{accountCreated}}
+{{/if}}
+<a href="/registration">Utwórz Konto</a>
+<a href="/reset-password">Zapomniałem hasła</a>

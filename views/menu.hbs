@@ -1,0 +1,38 @@
+<h1>Menu</h1>
+
+
+<form method="POST">
+    <table border="1">
+        <tr>
+            <td>lp. </td>
+            <td>Nazwa</td>
+            <td>Składniki</td>
+            <td>Kcal</td>
+            <td>Cena</td>
+            {{#if isAdmin}}
+            <td></td>
+            <td></td>
+            {{/if}}
+        </tr>
+        {{#each dishes}}
+        <tr>
+            <td>{{@index}}</td>
+            <td>{{name}}</td>
+            <td>{{ingredients}}</td>
+            <td>{{kcal}}kcal</td>
+            <td>{{price}}zł</td>
+            {{#if ../isAdmin}}
+            <td><button formaction="/menu/edit-dish" name="id" value="{{_id}}">Edytuj</button></td>
+            <td><button formaction="/menu/delete-dish" name="id" value="{{_id}}">Usuń</button></td>
+            {{/if}}
+        </tr>
+        {{/each}}
+</form>
+{{#if isAdmin}}
+<tr>
+    <td></td>
+    <td colspan="4"></td>
+    <td colspan="2"><button formaction="/menu/add-dish"> Dodaj </button></td>
+</tr>
+{{/if}}
+</table>

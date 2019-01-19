@@ -1,0 +1,15 @@
+Utwórz Konto
+
+<Form action="/registration/register-user" method="POST">
+    <input name="firstName" type="text" placeholder="Imię">
+    <input name="lastName" type="text" placeholder="Nazwisko">
+    <input name="mail" type="email" placeholder="E-mail">
+    <input name="tel" type="tel" placeholder="Telefon">
+    <input name="password" type="password" placeholder="Hasło">
+    <input name="password2" type="password" placeholder="Powtórz hasło">
+    <input type="submit" value="Utwótrz">
+</Form>
+
+{{#if error}}
+{{error}}
+{{/if}}
