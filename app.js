@@ -5,12 +5,14 @@ const hbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
 
+
 const PORT = 3000;
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs' }));
 app.set('view engine', 'hbs');
+
 
 app.use(session({
     key: 'restaurant.session.sid',
