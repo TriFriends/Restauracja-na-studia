@@ -12,6 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', hbs({ defaultLayout: 'main.hbs' }));
 app.set('view engine', 'hbs');
 
+
 app.use(session({
     key: 'restaurant.session.sid',
     secret: 'Lol',
