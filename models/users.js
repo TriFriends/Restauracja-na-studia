@@ -1,80 +1,32 @@
-var Datastore = require('nedb')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-var db = new Datastore({
-    filename: 'data/users.db',
-    autoload: true
-});
-
-
-class User {
-    constructor() {
-
+const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        default: 'user'
     }
-}
+})
 
-class Users {
-    constructor() {
+const User = mongoose.model('User', userSchema)
 
-    }
-
-    verify(mail, password) {
-        const promise = new Promise((resolve, reject) => {
-            db.findOne({ mail: mail }, (err, doc) => {
-                if (err) {
-                    reject('error');
-                }
-                if (doc) {
-                    if (doc.password == password) {
-                        resolve({ isValid: true, admin: doc.admin })
-                    }
-                }
-                resolve({ isValid: false })
-
-            });
-        });
-
-        return promise;
-
-    }
-
-    addUser(firstName, lastName, mail, tel, password) {
-        let user = {
-            firstName: firstName,
-            lastName: lastName,
-            mail: mail,
-            tel: tel,
-            password: password,
-            admin: false
-        }
-
-        const promise = new Promise((resolve, reject) => {
-            db.findOne({ mail: mail }, (err, doc) => {
-                if (err) {
-                    console.log(err);
-                    reject('error')
-                }
-
-                if (!doc) {
-                    db.insert(user, (err, doc) => {
-                        if (err) {
-                            console.log(err);
-                            reject('error')
-                        }
-                        else {
-                            resolve({ isAdded: true })
-                        }
-
-                    })
-                }
-                else {
-                    resolve({ isAdded: false })
-                }
-            });
-        });
-
-        return promise;
-    }
-}
-
-
-module.exports = new Users();
+export { userSchema, User }

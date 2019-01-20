@@ -1,40 +1,20 @@
-var Datastore = require('nedb')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const orderSchema = require('./orders').orderSchema
 
+const tableSchema = new Schema({
+    number: {
+        type: Number,
+        required: true,
+        unique: true
+    },
+    seats: {
+        type: Number,
+        required: true
+    },
+    reservation: [orderSchema]
+})
 
-class Table {
-    constructor(seats) {
-        this.seats = seats;
-        this.reserved = false;
-    }
+const Table = mongoose.model('Table', tableSchema)
 
-    getSeats() {
-        return this.seats;
-    }
-
-    isBooked() {
-        return this.reserved;
-    }
-}
-
-
-class Tables {
-    constructor() {
-        this.tables = [];
-        this.db = new Datastore({
-            filename: 'data/tables.db',
-            autoload: true
-        });
-    }
-
-    import() {
-
-    }
-
-    export() {
-
-    }
-
-    addTable(seats) {
-
-    }
-}
+export { tableSchema, Table }

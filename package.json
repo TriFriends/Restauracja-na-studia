@@ -4,7 +4,9 @@
   "description": "Projekt restauracja - rezerwowanie stolików dla klientów",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "DoubleForce",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "mongoose": "^5.4.5",
     "nedb": "^1.8.0"
   }
 }
