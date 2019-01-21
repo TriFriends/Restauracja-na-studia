@@ -13,9 +13,9 @@ class MenuRepository {
         })
     }
 
-    static createOrUpdate(name, updated) {
+    static createOrUpdate(name, toUpdate) {
         return new Promise((reolve, reject) => {
-            MenuModel.findOneAndUpdate({ name }, updated, { upsert: true, setDefaultsOnInsert: false }, (err, doc) => {
+            MenuModel.findOneAndUpdate({ name }, toUpdate, { upsert: true, setDefaultsOnInsert: false }, (err, doc) => {
                 if (err) {
                     reject()
                 }

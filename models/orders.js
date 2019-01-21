@@ -13,7 +13,4 @@ const orderSchema = new Schema({
     user: userSchema
 })
 
-const Order = mongoose.model('Order', orderSchema)
-
-exports.Order = Order
 exports.orderSchema = orderSchema

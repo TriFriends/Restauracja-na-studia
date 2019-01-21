@@ -12,7 +12,7 @@ const tableSchema = new Schema({
         type: Number,
         required: true
     },
-    reservation: [orderSchema]
+    reservations: [orderSchema]
 })
 
 const Table = mongoose.model('Table', tableSchema)
