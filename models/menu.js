@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 let menuSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     price: {
         type: Number,
@@ -14,4 +15,5 @@ let menuSchema = new Schema({
 
 const Menu = mongoose.model('Menu', menuSchema)
 
-export { menuSchema, Menu }
+exports.Menu = Menu
+exports.menuSchema = menuSchema
