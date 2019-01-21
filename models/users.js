@@ -5,19 +5,9 @@ var db = new Datastore({
     autoload: true
 });
 
-
-class User {
-    constructor() {
-
-    }
-}
-
 class Users {
-    constructor() {
 
-    }
-
-    verify(mail, password) {
+    static verify(mail, password) {
         const promise = new Promise((resolve, reject) => {
             db.findOne({ mail: mail }, (err, doc) => {
                 if (err) {
@@ -37,7 +27,7 @@ class Users {
 
     }
 
-    addUser(firstName, lastName, mail, tel, password) {
+    static addUser(firstName, lastName, mail, tel, password) {
         let user = {
             firstName: firstName,
             lastName: lastName,
@@ -77,4 +67,4 @@ class Users {
 }
 
 
-module.exports = new Users();
+module.exports = Users;
