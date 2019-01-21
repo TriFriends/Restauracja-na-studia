@@ -1,5 +1,2 @@
-{"firstName":"","lastName":"","mail":"admin@admin","tel":"","password":"admin","admin":true,"_id":"2Pkb3naHodgBv6PX"}
-{"firstName":"","lastName":"","mail":"d@a","tel":"","password":"da","admin":false,"_id":"CroCu0PPckNiVicv"}
-{"firstName":"David","lastName":"Bottom","mail":"db@db.db","tel":"450320123","password":"db","admin":false,"_id":"K4HWP3DjZJciha0O"}
-{"firstName":"","lastName":"","mail":"","tel":"","password":"","admin":false,"_id":"fQdkol1tcz2iQGuj"}
-{"firstName":"Adam","lastName":"Dudek","mail":"adam.dudek@gmail.com","tel":"606562343","password":"adam","admin":false,"_id":"tW1AriXAmHfoytuE"}
+{"firstName":"Admin","lastName":"","mail":"admin","tel":"","password":"admin","admin":true,"_id":"2zNPZbmyAEbmPEno"}
+{"firstName":"Dominik","lastName":"Smęda","mail":"d@s","tel":"","password":"ds","admin":false,"_id":"8tBv0YiscBFb6XVx"}

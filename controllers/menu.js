@@ -7,3 +7,19 @@ exports.deleteDish = (req, res) => {
     })
 
 }
+
+exports.addDish = (req, res) => {
+
+    menu.addDish(req.body.name, req.body.price).then(() => {
+        res.redirect('/menu');
+    })
+
+}
+
+exports.editDish = (req, res) => {
+
+    menu.editDish(req.body.id).then(() => {
+        res.redirect('/menu');
+    })
+
+}

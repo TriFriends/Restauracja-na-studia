@@ -43,3 +43,7 @@ exports.getRegistrationPage = (req, res) => {
 exports.getResetPasswordPage = (req, res) => {
     res.render('resetPassword.hbs');
 }
+
+exports.getContactPage = (req, res) => {
+    res.render('contact.hbs');
+}

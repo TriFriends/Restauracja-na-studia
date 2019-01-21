@@ -5,16 +5,10 @@ var db = new Datastore({
     autoload: true
 });
 
-class Dish {
-
-}
 
 class Menu {
-    constructor() {
 
-    }
-
-    getMenuList() {
+    static getMenuList() {
         const promise = new Promise((resolve, reject) => {
             db.find({}, function (err, docs) {
                 if (err) {
@@ -30,16 +24,14 @@ class Menu {
         return promise;
     }
 
-    addDish(name, ingredients, kcal, price) {
+    static async addDish(name, price) {
         let doc = {
             name: name,
-            ingredients: ingredients,
-            kcal: kcal,
-            price, price
+            price: price
 
         };
 
-        db.insert(doc, function (err, newDoc) {
+        return await db.insert(doc, function (err, newDoc) {
             if (err) {
                 console.log(err);
                 return false;
@@ -50,7 +42,7 @@ class Menu {
         });
     }
 
-    deleteDish(id) {
+    static deleteDish(id) {
         const promise = new Promise((resolve, reject) => {
             db.remove({ _id: id }, {}, function (err, numRemoved) {
                 if (err) {
@@ -63,4 +55,9 @@ class Menu {
     }
 }
 
-module.exports = new Menu();
+// Menu.addDish('Pizza', 20.45);
+// Menu.addDish('Zupa Pomidorowa', 12.00);
+// Menu.addDish('Pierogi Ruskie', 15.99);
+// Menu.addDish('Spaghetti', 10.75);
+
+module.exports = Menu;

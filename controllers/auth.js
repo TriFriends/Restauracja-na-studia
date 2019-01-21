@@ -8,7 +8,7 @@ exports.loginUser = (req, res) => {
     users.verify(mail, password).then(result => {
         if (result.isValid) {
             req.session.isLogged = true;
-            req.session.name = mail;
+            req.session.name = result.name;
             req.session.isAdmin = result.admin;
             res.redirect('/');
         }

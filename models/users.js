@@ -15,7 +15,7 @@ class Users {
                 }
                 if (doc) {
                     if (doc.password == password) {
-                        resolve({ isValid: true, admin: doc.admin })
+                        resolve({ isValid: true, admin: doc.admin, name: doc.firstName + ' ' + doc.lastName })
                     }
                 }
                 resolve({ isValid: false })
