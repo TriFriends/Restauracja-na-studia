@@ -12,9 +12,8 @@ class TableRepo {
         })
     }
 
-    static insertTable(table) {
+    static addTable(table) {
         return new Promise((resolve, reject) => {
-            table.reservations = []
             TableModel.create(table, (err, created) => {
                 if (err || !created) {
                     reject()
@@ -48,7 +47,6 @@ class TableRepo {
             )
         })
     }
-
 }
 
 module.exports = TableRepo
