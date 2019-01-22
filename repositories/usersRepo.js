@@ -12,6 +12,29 @@ class UserRepo {
             })
         })
     }
+
+    static findUsers() {
+        return new Promise((resolve, reject) => {
+            UsersModel.find({}, (err, docs) => {
+                if (err) {
+                    reject()
+                }
+                resolve(docs)
+            })
+        })
+    }
+
+    static findUserByEmail(email) {
+        return new Promise((resolve, reject) => {
+            UsersModel.findOne({ email }, (err, user) => {
+                if (err || !user) {
+                    reject()
+                }
+                resolve(user)
+            })
+        })
+    }
+
 }
 
 module.exports = UserRepo

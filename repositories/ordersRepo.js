@@ -1,4 +1,3 @@
-//const OrderModel = require('../models/orders').orderSchema
 const TableModel = require('../models/tables').Table
 
 class OrderRepo {
@@ -17,6 +16,23 @@ class OrderRepo {
                     resolve()
                 }
             )
+        })
+    }
+
+    static findOrders() {
+        return new Promise((resolve, reject) => {
+            TableModel.find({}, (err, tables) => {
+                if (err) {
+                    reject()
+                }
+                let reservations = []
+                for (let i = 0; i < tables.length; i++) {
+                    for (let k = 0; k < tables[i].reservations.length; k++) {
+                        reservations.push(tables[i].reservations[k])
+                    }
+                }
+                resolve(reservations)
+            })
         })
     }
 }
