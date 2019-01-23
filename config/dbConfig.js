@@ -9,5 +9,6 @@ module.exports = () => {
             process.exit(1)
         }
         console.log(`[MONGODB] Connected to instance on ${MONGODB_URI}`)
+        require('./oninit')();
     });
 }
