@@ -6,8 +6,6 @@ class MenuRepository {
         return new Promise((resolve, reject) => {
             MenuModel.find({}, (err, menus) => {
                 if (err) {
-                    console.log(err);
-
                     reject()
                 }
                 resolve(menus)
@@ -15,23 +13,33 @@ class MenuRepository {
         })
     }
 
-    static createOrUpdate(id, toUpdate) {
+    static updateById(id, doc) {
         return new Promise((resolve, reject) => {
-            MenuModel.findByIdAndUpdate(id, toUpdate, { upsert: true, setDefaultsOnInsert: false }, (err, doc) => {
-                if (err) {
+            MenuModel.updateOne({ _id: id }, doc, (err, raw) => {
+                console.log(raw)
+                if (err || raw.n == 0) {
                     reject()
                 }
-                resolve(doc)
+                resolve()
             })
         })
     }
 
-    static delete(id) {
+    static insert(doc) {
         return new Promise((resolve, reject) => {
-            MenuModel.findByIdAndDelete(id, (err) => {
+            MenuModel.create(doc, (err, menu) => {
                 if (err) {
-                    console.log(err);
+                    reject()
+                }
+                resolve()
+            })
+        })
+    }
 
+    static deleteById(id) {
+        return new Promise((resolve, reject) => {
+            MenuModel.findOneAndRemove({ _id: id }, (err) => {
+                if (err) {
                     reject()
                 }
                 resolve()
