@@ -24,9 +24,9 @@ class UserRepo {
         })
     }
 
-    static findUserByEmail(email) {
+    static findUserByEmail(id) {
         return new Promise((resolve, reject) => {
-            UsersModel.findOne({ email }, (err, user) => {
+            UsersModel.findById(id, (err, user) => {
                 if (err || !user) {
                     reject()
                 }
