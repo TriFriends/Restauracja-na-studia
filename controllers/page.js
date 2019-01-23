@@ -1,4 +1,4 @@
-const menuModel = require('../models/menu');
+const menu = require('../repositories/menuRepo')
 
 
 exports.getStartPage = (req, res) => {
@@ -20,7 +20,7 @@ exports.getLoginPage = (req, res) => {
 }
 
 exports.getMenuPage = (req, res) => {
-    menuModel.getMenuList()
+    menu.getAll()
         .then(result => {
             let context = {
                 dishes: result,

@@ -1,8 +1,8 @@
-const menu = require('../models/menu');
+const menu = require('../repositories/menuRepo');
 
 exports.deleteDish = (req, res) => {
 
-    menu.deleteDish(req.body.id).then(() => {
+    menu.delete(req.body.id).then(() => {
         res.redirect('/menu');
     })
 
@@ -10,17 +10,15 @@ exports.deleteDish = (req, res) => {
 
 exports.addDish = (req, res) => {
 
-    menu.addDish(req.body.name, req.body.price).then(() => {
+    menu.createOrUpdate(undefined, { name: req.body.name, price: req.body.price }).then(result => {
         res.redirect('/menu');
-    })
-
+    });
 }
 
 exports.editDish = (req, res) => {
-    console.log(req.body);
 
-    menu.editDish(req.body.id, req.body.name, req.body.price).then(() => {
+    menu.createOrUpdate(req.body.id, { name: req.body.name, price: req.body.price }).then(result => {
         res.redirect('/menu');
-    })
+    });
 
 }
