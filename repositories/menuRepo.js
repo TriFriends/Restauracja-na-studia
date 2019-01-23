@@ -13,7 +13,7 @@ class MenuRepository {
         })
     }
 
-    static createOrUpdate(id, toUpdate) {
+    static createOrUpdateById(id, toUpdate) {
         return new Promise((reolve, reject) => {
             MenuModel.update({ _id: id }, toUpdate, { upsert: true, setDefaultsOnInsert: false }, (err, doc) => {
                 if (err) {
@@ -24,7 +24,7 @@ class MenuRepository {
         })
     }
 
-    static delete(id) {
+    static deleteById(id) {
         return new Promise((resolve, reject) => {
             MenuModel.findByIdAndDelete(id, (err) => {
                 if (err) {
