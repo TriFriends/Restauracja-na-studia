@@ -23,9 +23,9 @@ class TableRepo {
         })
     }
 
-    static deleteTableByNumber(number) {
+    static deleteById(id) {
         return new Promise((resolve, reject) => {
-            TableModel.deleteOne({ number }, (err) => {
+            TableModel.deleteOne({ _id: id }, (err) => {
                 if (err) {
                     reject()
                 }
@@ -34,12 +34,13 @@ class TableRepo {
         })
     }
 
-    static updateByNumber(number, toUpdate) {
+    static updateById(id, toUpdate) {
         return new Promise((resolve, reject) => {
-            TableModel.update({ number },
+            TableModel.update({ _id: id },
                 { $set: toUpdate },
-                (err, count) => {
-                    if (err || count == 0) {
+                (err, raw) => {
+                    console.log(raw)
+                    if (err || raw.n == 0) {
                         reject()
                     }
                     resolve()

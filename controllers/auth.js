@@ -1,11 +1,11 @@
-const users = require('../repositories/usersRepo');
+const usersRepo = require('../repositories/usersRepo');
 
 exports.loginUser = (req, res) => {
 
     let email = req.body.mail;
     let password = req.body.password;
 
-    // users.verify(mail, password).then(result => {
+    // usersRepo.verify(mail, password).then(result => {
     //     if (result.isValid) {
     //         req.session.isLogged = true;
     //         req.session.name = result.name;
@@ -18,7 +18,7 @@ exports.loginUser = (req, res) => {
     //     }
     // })
 
-    users.findUserByEmail(email).then(result => {
+    usersRepo.findUserByEmail(email).then(result => {
         result.comparePassword(password, (err, isMatch) => {
             if (err || !isMatch) {
                 req.flash('error-login', 'Złe hasło lub login')
@@ -48,7 +48,7 @@ exports.registerUser = (req, res) => {
         return;
     }
 
-    // users.addUser(data.firstName, data.lastName, data.mail, data.tel, data.password).then(result => {
+    // usersRepo.addUser(data.firstName, data.lastName, data.mail, data.tel, data.password).then(result => {
     //     if (result.isAdded) {
     //         req.flash('accountCreated', 'Konto zostało utworzone.')
     //         res.redirect('/login');
@@ -60,7 +60,7 @@ exports.registerUser = (req, res) => {
     // });
 
     let d = req.body;
-    users.addUser({ firstname: d.firstname, lastname: d.lastname, email: d.email, phone: d.phone, password: d.password }).then(() => {
+    usersRepo.addUser({ firstname: d.firstname, lastname: d.lastname, email: d.email, phone: d.phone, password: d.password }).then(() => {
         req.flash('accountCreated', 'Konto zostało utworzone.')
         res.redirect('/login');
     }).catch(() => {
