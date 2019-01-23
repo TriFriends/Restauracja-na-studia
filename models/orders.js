@@ -1,6 +1,16 @@
-var Datastore = require('nedb')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const userSchema = require('./users').userSchema
 
-var db = new Datastore({
-    filename: 'data/orders.db',
-    autoload: true
-});
+const orderSchema = new Schema({
+    time: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date
+    },
+    user: userSchema
+})
+
+exports.orderSchema = orderSchema

@@ -1,70 +1,67 @@
-var Datastore = require('nedb')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs')
 
-var db = new Datastore({
-    filename: 'data/users.db',
-    autoload: true
-});
-
-class Users {
-
-    static verify(mail, password) {
-        const promise = new Promise((resolve, reject) => {
-            db.findOne({ mail: mail }, (err, doc) => {
-                if (err) {
-                    reject('error');
-                }
-                if (doc) {
-                    if (doc.password == password) {
-                        resolve({ isValid: true, admin: doc.admin, name: doc.firstName + ' ' + doc.lastName })
-                    }
-                }
-                resolve({ isValid: false })
-
-            });
-        });
-
-        return promise;
-
+const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    phone: {
+        type: String
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    admin: {
+        type: Boolean,
+        default: false,
+        required: true
     }
+})
 
-    static addUser(firstName, lastName, mail, tel, password) {
-        let user = {
-            firstName: firstName,
-            lastName: lastName,
-            mail: mail,
-            tel: tel,
-            password: password,
-            admin: false
+userSchema.methods.comparePassword = function (passwordToCheck) {
+    bcrypt.compare(passwordToCheck, this.password, function (err, isMatch) {
+        if (err) {
+            return false
         }
-
-        const promise = new Promise((resolve, reject) => {
-            db.findOne({ mail: mail }, (err, doc) => {
-                if (err) {
-                    console.log(err);
-                    reject('error')
-                }
-
-                if (!doc) {
-                    db.insert(user, (err, doc) => {
-                        if (err) {
-                            console.log(err);
-                            reject('error')
-                        }
-                        else {
-                            resolve({ isAdded: true })
-                        }
-
-                    })
-                }
-                else {
-                    resolve({ isAdded: false })
-                }
-            });
-        });
-
-        return promise;
-    }
+        return true
+    })
 }
 
+userSchema.pre('save', (next) => {
+    const user = this
+    if (!user.isModified('password')) {
+        return next()
+    }
+    bcrypt.genSalt(3, (err, salt) => {
+        if (err) {
+            return next(err)
+        }
 
-module.exports = Users;
+        bcrypt.hash(user.password, salt, (err, hashed) => {
+            if (err) {
+                return next(err)
+            }
+            user.password = hashed
+            next()
+        })
+    })
+})
+
+const User = mongoose.model('User', userSchema)
+
+
+
+exports.User = User
+exports.userSchema = userSchema
