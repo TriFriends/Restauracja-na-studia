@@ -5,20 +5,7 @@ exports.loginUser = (req, res) => {
     let email = req.body.mail;
     let password = req.body.password;
 
-    // usersRepo.verify(mail, password).then(result => {
-    //     if (result.isValid) {
-    //         req.session.isLogged = true;
-    //         req.session.name = result.name;
-    //         req.session.isAdmin = result.admin;
-    //         res.redirect('/');
-    //     }
-    //     else {
-    //         req.flash('error-login', 'Złe hasło lub login')
-    //         res.redirect('/login');
-    //     }
-    // })
-
-    usersRepo.findUserByEmail(email).then(result => {
+    users.findUserByEmail(email).then(result => {
         result.comparePassword(password, (err, isMatch) => {
             if (err || !isMatch) {
                 req.flash('error-login', 'Złe hasło lub login')
@@ -47,17 +34,6 @@ exports.registerUser = (req, res) => {
         res.redirect('/registration');
         return;
     }
-
-    // usersRepo.addUser(data.firstName, data.lastName, data.mail, data.tel, data.password).then(result => {
-    //     if (result.isAdded) {
-    //         req.flash('accountCreated', 'Konto zostało utworzone.')
-    //         res.redirect('/login');
-    //     }
-    //     else {
-    //         req.flash('error-registration', 'Konto już istnieje.')
-    //         res.redirect('/registration');
-    //     }
-    // });
 
     let d = req.body;
     usersRepo.addUser({ firstname: d.firstname, lastname: d.lastname, email: d.email, phone: d.phone, password: d.password }).then(() => {
