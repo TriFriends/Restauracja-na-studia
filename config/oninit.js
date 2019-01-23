@@ -1,8 +1,10 @@
 const User = require('../models/users').User
 
-export default () => {
+module.exports = () => {
     User.find({ admin: true }, (err, results) => {
-        if (!results) {
+        //console.log(err, results);
+
+        if (results.length == 0) {
             User.create({
                 firstname: 'admin',
                 lastname: 'admin',

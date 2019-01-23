@@ -4,7 +4,7 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
-
+const dbConfig = require('./config/dbConfig')();
 
 const PORT = 3000;
 const app = express();

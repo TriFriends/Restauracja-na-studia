@@ -1,26 +1,34 @@
-const menu = require('../models/menu');
+const menu = require('../repositories/menuRepo');
 
 exports.deleteDish = (req, res) => {
 
-    menu.deleteDish(req.body.id).then(() => {
+    menu.deleteById(req.body.id).then(() => {
         res.redirect('/menu');
+    }).catch(err => {
+        console.log(err)
     })
 
 }
 
 exports.addDish = (req, res) => {
+    console.log(req.body);
 
-    menu.addDish(req.body.name, req.body.price).then(() => {
+    menu.insert({ name: req.body.name, price: parseFloat(req.body.price) }).then(result => {
         res.redirect('/menu');
+    }).catch(err => {
+        console.log(err)
     })
+
 
 }
 
 exports.editDish = (req, res) => {
-    console.log(req.body);
 
-    menu.editDish(req.body.id, req.body.name, req.body.price).then(() => {
+    menu.UpdateById(req.body.id, { name: req.body.name, price: req.body.price }).then(result => {
         res.redirect('/menu');
+    }).catch(err => {
+        console.log(err);
+
     })
 
 }
