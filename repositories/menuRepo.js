@@ -13,20 +13,32 @@ class MenuRepository {
         })
     }
 
-    static createOrUpdateById(id, toUpdate) {
-        return new Promise((reolve, reject) => {
-            MenuModel.update({ _id: id }, toUpdate, { upsert: true, setDefaultsOnInsert: false }, (err, doc) => {
+    static updateById(id, doc) {
+        return new Promise((resolve, reject) => {
+            MenuModel.updateOne({ _id: id }, doc, (err, raw) => {
+                console.log(raw)
+                if (err || raw.n == 0) {
+                    reject()
+                }
+                resolve()
+            })
+        })
+    }
+
+    static insert(doc) {
+        return new Promise((resolve, reject) => {
+            MenuModel.create(doc, (err, menu) => {
                 if (err) {
                     reject()
                 }
-                resolve(doc)
+                resolve()
             })
         })
     }
 
     static deleteById(id) {
         return new Promise((resolve, reject) => {
-            MenuModel.findByIdAndDelete(id, (err) => {
+            MenuModel.findOneAndRemove({ _id: id }, (err) => {
                 if (err) {
                     reject()
                 }

@@ -6,6 +6,7 @@ class UserRepo {
         return new Promise((resolve, reject) => {
             UsersModel.create(user, (err, created) => {
                 if (err) {
+                    console.log(err)
                     reject()
                 }
                 resolve()
@@ -24,9 +25,9 @@ class UserRepo {
         })
     }
 
-    static findUserById(id) {
+    static findUserByEmail(email) {
         return new Promise((resolve, reject) => {
-            UsersModel.findById(id, (err, user) => {
+            UsersModel.findOne({ email }, (err, user) => {
                 if (err || !user) {
                     reject()
                 }
