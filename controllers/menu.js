@@ -17,8 +17,9 @@ exports.addDish = (req, res) => {
 }
 
 exports.editDish = (req, res) => {
+    console.log(req.body);
 
-    menu.editDish(req.body.id).then(() => {
+    menu.editDish(req.body.id, req.body.name, req.body.price).then(() => {
         res.redirect('/menu');
     })
 

@@ -2,44 +2,55 @@
     <h1>Menu</h1>
 
 
-    <form method="POST">
-        <table>
-            <tr>
-                <th>lp. </th>
-                <th>Nazwa</th>
-                <th>Cena</th>
-                {{#if isAdmin}}
-                <th></th>
-                <th></th>
-                {{/if}}
-            </tr>
-            {{#each dishes}}
-            <tr>
-                <td>{{@index}}.</td>
-                <td>{{name}}</td>
 
-                <td>{{price}}zł</td>
-                {{#if ../isAdmin}}
-                <td class="admin-td"><button formaction="/menu/edit-dish" name="id" value="{{_id}}">Edytuj</button></td>
-                <td class="admin-td"><button formaction="/menu/delete-dish" name="id" value="{{_id}}">Usuń</button></td>
-                {{/if}}
-            </tr>
-            {{/each}}
+    <table>
+        <tr>
+            <th>lp. </th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            {{#if isAdmin}}
+            <th></th>
+            <th></th>
+            {{/if}}
+        </tr>
+        {{#each dishes}}
+        <tr>
+            <td>{{@index}}.</td>
+            <td>{{name}}</td>
 
-            {{#unless dishes}}
+            <td>{{price}}zł</td>
+            {{#if ../isAdmin}}
+            <td class="admin-td">
+
+                <button class="editButton" name="id" value="{{_id}}" formaction="/menu/edit-dish">Edytuj</button>
+
+            </td>
+            <td class="admin-td">
+                <form method="POST">
+                    <button class="editButton" type="submit" formaction="/menu/delete-dish" name="id" value="{{_id}}">Usuń</button>
+                </form>
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+
+        {{#unless dishes}}
+        <tr>
+            <td colspan="5">Brak Menu</td>
+        </tr>
+        {{/unless}}
+
+        <form method="POST">
+            {{#if isAdmin}}
             <tr>
-                <td colspan="5">Brak Menu</td>
+                <td></td>
+                <td class="input"><input name="name" type="text"></td>
+                <td class="input"><input name="price" type="text"></td>
+                <td class="admin-td" colspan="2"><button formaction="/menu/add-dish"> Dodaj </button></td>
             </tr>
-            {{/unless}}
-    </form>
-    {{#if isAdmin}}
-    <tr>
-        <td></td>
-        <td class="input"><input name="name" type="text"></td>
-        <td class="input"><input name="price" type="text"></td>
-        <td class="admin-td" colspan="2"><button formaction="/menu/add-dish"> Dodaj </button></td>
-    </tr>
-    {{/if}}
+            {{/if}}
+        </form>
     </table>
 
+    </form>
 </div>

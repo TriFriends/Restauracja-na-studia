@@ -53,6 +53,23 @@ class Menu {
         });
         return promise;
     }
+
+    static editDish(id, name, price) {
+        console.log(name);
+
+        return new Promise((resolve, reject) => {
+            let obj = {
+                name: name,
+                price: price
+            }
+            db.update({ _id: id }, { $set: obj }, {}, function (err, numUpdated) {
+                if (err) {
+                    reject('error');
+                }
+                resolve();
+            });
+        });
+    }
 }
 
 // Menu.addDish('Pizza', 20.45);
