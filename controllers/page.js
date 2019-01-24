@@ -1,8 +1,18 @@
-const menu = require('../repositories/menuRepo')
-
+const menuRepo = require('../repositories/menuRepo')
+const tablesRepo = require('../repositories/tablesRepo')
 
 exports.getStartPage = (req, res) => {
-    res.render('index.hbs')
+
+    tablesRepo.getTables()
+        .then(tables => {
+            res.render('index.hbs', {
+                tables: tables
+            })
+        }).catch(err => {
+            console.log('error in page');
+
+        })
+
 }
 
 exports.getLoginPage = (req, res) => {
@@ -25,7 +35,7 @@ exports.getMenuPage = (req, res) => {
         error = null;
     }
 
-    menu.getAll()
+    menuRepo.getAll()
         .then(result => {
             let context = {
                 dishes: result,

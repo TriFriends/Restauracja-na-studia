@@ -2,10 +2,11 @@ const express = require('express');
 const pageController = require('../controllers/page');
 const authController = require('../controllers/auth');
 const menuController = require('../controllers/menu');
+const tablesController = require('../controllers/tables');
+
 const MW = require('../controllers/middleware')
 
 const router = express.Router();
-
 
 router.get('/', pageController.getStartPage);
 router.get('/login', pageController.getLoginPage);
