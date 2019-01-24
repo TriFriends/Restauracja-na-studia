@@ -12,6 +12,28 @@ class TableRepo {
         })
     }
 
+    static getTable(id) {
+        return new Promise((resolve, reject) => {
+            TableModel.findOne({ _id: id }, (err, table) => {
+                if (err) {
+                    reject()
+                }
+                resolve(table)
+            })
+        })
+    }
+
+    static getTableByNumber(number) {
+        return new Promise((resolve, reject) => {
+            TableModel.findOne({ number }, (err, table) => {
+                if (err) {
+                    reject()
+                }
+                resolve(table)
+            })
+        })
+    }
+
     static addTable(table) {
         return new Promise((resolve, reject) => {
             TableModel.create(table, (err, created) => {

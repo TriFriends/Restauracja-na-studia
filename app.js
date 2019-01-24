@@ -4,10 +4,13 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
-
-
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/restaurant'
+const DBConfig = require('./config/DBConfig')
 const PORT = 3000;
 const app = express();
+
+let dbConnection = new DBConfig(MONGODB_URI)
+dbConnection.connect()
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', hbs({
