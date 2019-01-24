@@ -1,8 +1,5 @@
 <div id="menu">
     <h1>Menu</h1>
-
-
-
     <table>
         <tr>
             <th>lp. </th>
@@ -16,22 +13,29 @@
         {{#each dishes}}
         <tr>
             <td>{{@index}}.</td>
-            <td>{{name}}</td>
+            <td class="input">
+                <h3>{{name}}</h3>
+            </td>
 
-            <td>{{price}}zł</td>
+            <td class="input">
+                <h3>{{price}}zł</h3>
+            </td>
             {{#if ../isAdmin}}
             <td class="admin-td">
 
-                <button class="editButton" name="id" value="{{_id}}" formaction="/menu/edit-dish">Edytuj</button>
+                <button class="editButton" onclick="editMenu(this)" name="id" value="{{_id}}" formaction="/menu/edit-dish">Edytuj</button>
 
             </td>
             <td class="admin-td">
-                <form method="POST">
-                    <button class="editButton" type="submit" formaction="/menu/delete-dish" name="id" value="{{_id}}">Usuń</button>
-                </form>
+
+                <button class="editButton" onclick="editMenu(this)" type="submit" formaction="/menu/delete-dish" name="id"
+                    value="{{_id}}">Usuń</button>
+
             </td>
+
             {{/if}}
         </tr>
+
         {{/each}}
 
         {{#unless dishes}}
@@ -50,7 +54,12 @@
             </tr>
             {{/if}}
         </form>
+
+        {{#if error}}
+        <td colspan="5" class="error">{{error}}</td>
+        {{/if}}
     </table>
 
-    </form>
+
+
 </div>

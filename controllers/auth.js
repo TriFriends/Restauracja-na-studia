@@ -1,4 +1,4 @@
-const usersRepo = require('../repositories/usersRepo');
+const users = require('../repositories/usersRepo');
 
 exports.loginUser = (req, res) => {
 

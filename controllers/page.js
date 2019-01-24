@@ -20,11 +20,17 @@ exports.getLoginPage = (req, res) => {
 }
 
 exports.getMenuPage = (req, res) => {
+    let error = req.flash('error-menu');
+    if (error.length <= 0) {
+        error = null;
+    }
+
     menu.getAll()
         .then(result => {
             let context = {
                 dishes: result,
-                isAdmin: req.session.isAdmin
+                isAdmin: req.session.isAdmin,
+                error: error
             }
             res.render('menu.hbs', context);
         })
