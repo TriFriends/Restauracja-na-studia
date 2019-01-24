@@ -12,8 +12,9 @@ exports.deleteDish = (req, res) => {
 }
 
 exports.addDish = (req, res) => {
-
-    menu.insert({ name: req.body.name, price: parseFloat(req.body.price) }).then(result => {
+    let price = Number(req.body.price);
+    price = price.toFixed(2)
+    menu.insert({ name: req.body.name, price: price }).then(result => {
         res.redirect('/menu');
     }).catch(err => {
         req.flash('error-menu', 'Wprowadzono dane w nieprawidłowym formacie');
