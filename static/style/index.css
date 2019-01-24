@@ -1,0 +1,8 @@
+#reservation h1 {
+    padding: 40px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    background: rgb(10, 238, 78);
+    color: white;
+}

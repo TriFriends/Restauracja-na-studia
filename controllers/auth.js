@@ -1,11 +1,11 @@
-const users = require('../repositories/usersRepo');
+const usersRepo = require('../repositories/usersRepo');
 
 exports.loginUser = (req, res) => {
 
     let email = req.body.mail;
     let password = req.body.password;
 
-    users.findUserByEmail(email).then(result => {
+    usersRepo.findUserByEmail(email).then(result => {
         result.comparePassword(password, (err, isMatch) => {
             if (err || !isMatch) {
                 req.flash('error-login', 'Złe hasło lub login')
@@ -13,7 +13,7 @@ exports.loginUser = (req, res) => {
             }
             else {
                 req.session.isLogged = true;
-                req.session.name = result.firstname;
+                req.session.name = result.firstname + ' ' + result.lastname;
                 req.session.isAdmin = result.admin;
                 res.redirect('/');
             }
