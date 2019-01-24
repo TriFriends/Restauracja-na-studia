@@ -1,8 +1,11 @@
-const menu = require('../models/menu');
+const menu = require('../repositories/menuRepo');
 
 exports.deleteDish = (req, res) => {
 
-    menu.deleteDish(req.body.id).then(() => {
+    menu.deleteById(req.body.id).then(() => {
+        res.redirect('/menu');
+    }).catch(err => {
+        req.flash('error-menu', 'Wprowadzono dane w nieprawidłowym formacie');
         res.redirect('/menu');
     })
 
@@ -10,16 +13,22 @@ exports.deleteDish = (req, res) => {
 
 exports.addDish = (req, res) => {
 
-    menu.addDish(req.body.name, req.body.price).then(() => {
+    menu.insert({ name: req.body.name, price: parseFloat(req.body.price) }).then(result => {
+        res.redirect('/menu');
+    }).catch(err => {
+        req.flash('error-menu', 'Wprowadzono dane w nieprawidłowym formacie');
         res.redirect('/menu');
     })
+
 
 }
 
 exports.editDish = (req, res) => {
-    console.log(req.body);
 
-    menu.editDish(req.body.id, req.body.name, req.body.price).then(() => {
+    menu.updateById(req.body.id, { name: req.body.name, price: parseFloat(req.body.price) }).then(result => {
+        res.redirect('/menu');
+    }).catch(err => {
+        req.flash('error-menu', 'Wprowadzono dane w nieprawidłowym formacie');
         res.redirect('/menu');
     })
 

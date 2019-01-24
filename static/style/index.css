@@ -1,0 +1,62 @@
+#reservation h1 {
+    padding: 40px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    background: rgb(10, 238, 78);
+    color: white;
+}
+
+#reservation table {
+    width: 400px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    color: white;
+}
+
+#reservation table tr:first-child {
+    font-size: 20px;
+    font-weight: 600;
+    cursor: auto;
+}
+
+#reservation table tr:nth-child(2) {
+    cursor: auto;
+}
+
+#reservation th {
+    background: rgb(9, 159, 228);
+    padding: 20px;
+}
+
+#reservation table tr {
+    background: rgb(75, 75, 75);
+    border: 5px solid white;
+    cursor: pointer;
+}
+
+#reservation table tr:first-child:hover {
+    background: rgb(75, 75, 75);
+}
+
+#reservation table tr:hover {
+    background: rgb(180, 180, 180);
+}
+
+#reservation table td {
+    padding: 15px;
+}
+
+#reservation .nextTo {
+    float: left;
+    width: 60%;
+}
+
+#reservation>:nth-child(2) {
+    width: 40%;
+}
+
+#reservation #reservationTab {
+    width: 800px;
+}

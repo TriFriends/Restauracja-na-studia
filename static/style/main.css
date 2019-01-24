@@ -86,12 +86,12 @@ nav a:hover {
     color: white;
 }
 
-th {
+#menu th {
     background: rgb(9, 159, 228);
     padding: 20px;
 }
 
-tr td:first-child {
+#menutr td:first-child {
     width: 15px;
     text-align: center;
 }
@@ -135,7 +135,11 @@ table .input {
     padding: 0px !important;
 }
 
-table .input input {
+table .input h3 {
+    padding-top: 14px !important;
+}
+
+body table .input>* {
     width: 100%;
     height: 50px;
     padding: 10px;

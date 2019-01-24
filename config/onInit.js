@@ -4,7 +4,9 @@ const RestaurantConfig = require('../models/restaurantConfig').RestaurantConfig
 
 module.exports = () => {
     User.find({ admin: true }, (err, results) => {
-        if (!results) {
+        //console.log(err, results);
+
+        if (results.length == 0) {
             User.create({
                 firstname: 'admin',
                 lastname: 'admin',

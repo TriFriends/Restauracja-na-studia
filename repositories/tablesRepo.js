@@ -7,6 +7,8 @@ class TableRepo {
                 if (err) {
                     reject()
                 }
+                console.log(tables);
+
                 resolve(tables)
             })
         })
@@ -38,6 +40,7 @@ class TableRepo {
         return new Promise((resolve, reject) => {
             TableModel.create(table, (err, created) => {
                 if (err || !created) {
+                    console.log(err)
                     reject()
                 }
                 resolve()

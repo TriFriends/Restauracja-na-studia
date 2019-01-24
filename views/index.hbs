@@ -1,1 +1,36 @@
-Witaj w naszej restauracji
+<div id="reservation">
+    <h1>Rezerwacje</h1>
+    <div class="nextTo">
+
+
+        <table>
+            <tr>
+                <td colspan="2">Stoliki</td>
+            </tr>
+            <tr>
+                <th>Numer</th>
+                <th>Miejsca</th>
+            </tr>
+            {{#each tables}}
+            <tr>
+                <td>{{number}}</td>
+                <td>{{seats}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <div class="nextTo">
+        <table id="reservationTab">
+            <tr>
+                <td>Rezerwacje</td>
+            </tr>
+            <tr>
+                <th>
+                    Dz
+                </th>
+            </tr>
+        </table>
+
+    </div>
+</div>
