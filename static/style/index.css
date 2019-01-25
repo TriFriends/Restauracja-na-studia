@@ -15,7 +15,7 @@
     color: white;
 }
 
-#reservation table tr:first-child {
+#reservation table .selectTable:first-child {
     font-size: 20px;
     font-weight: 600;
     cursor: auto;
@@ -33,15 +33,11 @@
 #reservation table tr {
     background: rgb(75, 75, 75);
     border: 5px solid white;
-    cursor: pointer;
 }
 
-#reservation table tr:first-child:hover {
-    background: rgb(75, 75, 75);
-}
-
-#reservation table tr:hover {
+#reservation table .selectTable:hover {
     background: rgb(180, 180, 180);
+    cursor: pointer;
 }
 
 #reservation table td {

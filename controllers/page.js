@@ -7,6 +7,7 @@ exports.getStartPage = (req, res) => {
         .then(tables => {
             res.render('index.hbs', {
                 tables: tables
+
             })
         }).catch(err => {
             console.log('error in page');

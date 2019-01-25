@@ -21,6 +21,17 @@ class OrderRepo {
         })
     }
 
+    static findOrdersByDate(date) {
+        return new Promise((resolve, reject) => {
+            TableModel.find({ date }, (err, tables) => {
+                if (err) {
+                    reject()
+                }
+                resolve(tables)
+            })
+        })
+    }
+
     static findOrders() {
         return new Promise((resolve, reject) => {
             TableModel.find({}, (err, tables) => {

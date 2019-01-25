@@ -12,7 +12,7 @@
                 <th>Miejsca</th>
             </tr>
             {{#each tables}}
-            <tr>
+            <tr class="selectTable" onclick="">
                 <td>{{number}}</td>
                 <td>{{seats}}</td>
             </tr>
@@ -25,14 +25,23 @@
             <tr>
                 <td colspan="3">Rezerwacje</td>
             </tr>
+            {{#if isChosen}}
             <tr>
                 <th>
-                    < wstecz</th> <th>
-                        23-03-2000
+                    wstecz
                 </th>
-                <th> przód > </th>
+                <th>
+                    {{date}}
+                </th>
+                <th> przód </th>
                 </wstecz>
             </tr>
+            {{else}}
+            <tr>
+                <td>Wybierz Stolik</td>
+            </tr>
+
+            {{/if}}
         </table>
 
     </div>
