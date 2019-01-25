@@ -10,13 +10,51 @@
             <tr>
                 <th>Numer</th>
                 <th>Miejsca</th>
+
             </tr>
+
+            {{#if error}}
+            <tr>
+                <td colspan="2" style="padding:0">
+                    <div style="width:100%" class="error">{{error}}</div>
+                </td>
+            </tr>
+            {{/if}}
             {{#each tables}}
-            <tr class="selectTable" onclick="">
+
+
+            {{#if ../isAdmin}}
+            <tr class="editTable">
+                <td colspan="2">
+                    <form method="POST">
+                        <input type="number" name="number" value="{{number}}">
+                        <input type="number" name="seats" value="{{seats}}">
+                        <input type="hidden" name="id" value="{{_id}}">
+                        <button type="submit" formaction="/edit-table">Zapisz</button>
+                        <button type="submit" formaction="/delete-table">Usuń</button>
+                    </form>
+                </td>
+
+            </tr>
+            {{else}}
+            <tr class="selectTable" onclick="selectTable({{number}})">
                 <td>{{number}}</td>
                 <td>{{seats}}</td>
             </tr>
+            {{/if}}
             {{/each}}
+
+            {{#if isAdmin}}
+            <tr class="editTable">
+                <td colspan="2">
+                    <form method="POST" action="/add-table">
+                        <input type="number" name="number" value="{{number}}">
+                        <input type="number" name="seats" value="{{seats}}">
+                        <button style="width:185px" type="submit">Dodaj</button>
+                    </form>
+                </td>
+            </tr>
+            {{/if}}
         </table>
     </div>
 

@@ -15,9 +15,9 @@
     color: white;
 }
 
-#reservation table .selectTable:first-child {
+#reservation table tr:first-child {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: auto;
 }
 
@@ -55,4 +55,38 @@
 
 #reservation #reservationTab {
     width: 800px;
+}
+
+#reservation table tr.editTable {}
+
+#reservation table .editTable td {
+    padding: 5px;
+}
+
+#reservation table tr.editTable input {
+    width: 90px;
+    height: 50px;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+    padding-left: 15px;
+}
+
+#reservation table tr.editTable button {
+    height: 50px;
+    width: 90px;
+    font-size: 15px;
+    color: white;
+    background: rgba(11, 216, 107, 0.911);
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+    border: 1px solid;
+    padding: 5px;
+}
+
+#reservation table tr.editTable button:hover {
+    color: rgba(11, 216, 107, 0.911);
+    background: white;
+    border-color: rgba(11, 216, 107, 0.911);
 }

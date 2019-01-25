@@ -1,19 +1,10 @@
 
-
-// let buttons = document.querySelectorAll('.editButton');
-
-// for (let button of buttons) {
-//     button.addEventListener('click', editMenu);
-// }
-
 let editingTr = undefined;
 let editingTrHTML;
 function editMenu(me) {
-    // console.log('click', this);
-    // console.log(this.parentElement.parentElement);
+
 
     if (me.innerText == 'Zapisz' || me.innerText == 'Usuń') {
-        console.log('z u');
         let form = document.createElement('form');
         form.style.display = "none";
         form.method = "POST";
@@ -27,7 +18,6 @@ function editMenu(me) {
                 <input name="id" value="${me.value}">
                 <button type="submit">Wyslij</button>
             `;
-            console.log(form);
 
             document.body.appendChild(form)
             form.submit();
@@ -40,7 +30,6 @@ function editMenu(me) {
                 <input name="id" value="${me.value}">
                 <button type="submit">Wyslij</button>
             `;
-            console.log(form);
 
             document.body.appendChild(form)
             form.submit();
@@ -52,17 +41,13 @@ function editMenu(me) {
 
     }
     let tr = me.parentElement.parentElement;
-    console.log(tr);
 
     if (me.innerText == "Edytuj" && !editingTr) {
-        console.log('fe', tr);
         editingTr = tr;
         editingTrHTML = tr.innerHTML;
-        // console.log(editingTrHTML);
 
     }
     else if (me.innerText == "Edytuj" && editingTr) {
-        console.log('now');
 
         editingTr.innerHTML = editingTrHTML;
         editingTr = tr;
@@ -72,35 +57,30 @@ function editMenu(me) {
 
 
     if (me.innerText == 'Wróć') {
-        console.log('w');
-        // console.log(tr);
-        // console.log(editingTrHTML);
         tr.innerHTML = editingTrHTML
         editingTr = undefined;
         return;
 
     }
 
-    // if (this.innerText == 'Edytuj' && !editingTr) {
-    //     console.log('eeee');
-    //     editingTr = this.parentElement.parentElement.parentElement;
-    //     editingTrHTML = this.innerHTML;
-
-    // }
-    // else if (this.innerText == 'Edytuj' && editingTr) {
-    //     console.log('e');
-
-    //     editingTr = this.parentElement.parentElement.parentElement;
-    //     editingTr.innerHTML = editingTrHTML;
-    // }
-
-
-    // let tr = this.parentElement.parentElement.parentElement;
-    // editingTr = tr;
-    // editingTrHTML = tr.innerHTML;
 
     tr.children[1].innerHTML = `<input name="name" type="text" value="${tr.children[1].children[0].innerHTML}">`;
     tr.children[2].innerHTML = `<input name="price" type="text" value="${tr.children[2].children[0].innerText.replace("zł", "")}">`;
     tr.children[3].children[0].innerText = "Zapisz"
     tr.children[4].children[0].innerText = "Wróć"
+}
+
+function selectTable(nr) {
+    let form = document.createElement('form');
+    form.style.display = "none";
+    form.method = "POST";
+    form.action = "http://localhost:3000/select-table";
+    form.innerHTML = `
+        <input type="hidden" name="nr" value="${nr}">
+        <button type="submit"></button>
+    `;
+    console.log(nr);
+
+    document.body.appendChild(form)
+    form.submit();
 }

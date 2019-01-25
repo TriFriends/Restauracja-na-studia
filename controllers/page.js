@@ -3,14 +3,21 @@ const tablesRepo = require('../repositories/tablesRepo')
 
 exports.getStartPage = (req, res) => {
 
+    let error = req.flash('error-index');
+    if (error.length <= 0) {
+        error = null;
+    }
+
     tablesRepo.getTables()
         .then(tables => {
             res.render('index.hbs', {
-                tables: tables
+                tables: tables,
+                isAdmin: req.session.isAdmin,
+                error: error
 
             })
         }).catch(err => {
-            console.log('error in page');
+            res.send('PROBLEM Z SERWEREM');
 
         })
 
