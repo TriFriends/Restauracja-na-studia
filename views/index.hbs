@@ -37,7 +37,8 @@
 
             </tr>
             {{else}}
-            <tr class="selectTable" onclick="selectTable('{{_id}}')">
+
+            <tr class="selectTable {{#if ../../selected}}selected{{/if}}" onclick="selectTable('{{_id}}')">
                 <td>{{number}}</td>
                 <td>{{seats}}</td>
             </tr>

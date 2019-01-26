@@ -43,6 +43,8 @@ exports.getStartPage = async (req, res) => {
             if (id) {
                 for (let t of tables) {
                     if (selectedTable._id == t._id) {
+                        console.log('tuuu ' + t);
+
                         t.selected = true;
                     }
                 }

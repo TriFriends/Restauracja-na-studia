@@ -90,3 +90,7 @@
     background: white;
     border-color: rgba(11, 216, 107, 0.911);
 }
+
+#reservation .selected {
+    color: red;
+}
