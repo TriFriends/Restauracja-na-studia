@@ -3,6 +3,7 @@ const pageController = require('../controllers/page');
 const authController = require('../controllers/auth');
 const menuController = require('../controllers/menu');
 const tablesController = require('../controllers/tables');
+const ordersController = require('../controllers/orders');
 
 const MW = require('../controllers/middleware')
 
@@ -27,5 +28,8 @@ router.post('/select-table', pageController.getStartPage);
 router.post('/add-table', MW.ensureIsAdmin, tablesController.addTable)
 router.post('/edit-table', MW.ensureIsAdmin, tablesController.editTable)
 router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
+
+router.post('/order', MW.ensureisLogged, ordersController.order);
+
 module.exports = router;
 

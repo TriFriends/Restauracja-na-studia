@@ -13,7 +13,6 @@ exports.getStartPage = async (req, res) => {
 
     let id = req.body.id;
     let last = Number(req.body.last);
-    console.log('LAST   ' + last);
 
     if (!last) {
         last = 0;
@@ -24,7 +23,7 @@ exports.getStartPage = async (req, res) => {
         last += Number(req.body.day);
 
     let selectedTable;
-    console.log('llast ', last);
+
     if (id) {
 
 
@@ -42,14 +41,15 @@ exports.getStartPage = async (req, res) => {
         .then(tables => {
             if (id) {
                 for (let t of tables) {
-                    if (selectedTable._id == t._id) {
-                        console.log('tuuu ' + t);
 
+                    if (t.number == selectedTable.number) {
                         t.selected = true;
+
                     }
                 }
             }
-            // console.log('2s3' + selectedTable.reservations);
+
+
 
             let context = {
                 tables: tables,
@@ -64,7 +64,7 @@ exports.getStartPage = async (req, res) => {
                 context.reservations = selectedTable.reservations;
                 context.open = 11;
                 context.close = 22;
-                context.id = id;
+                context.tableId = id;
                 context.last = last;
 
             }

@@ -20,10 +20,11 @@ app.engine('hbs', hbs({
     helpers: {
         renderCalendar: function (reservations, open, close) {
             console.log('heloper' + reservations);
-            let html = '';
+            let html = '<div class="hour-container">';
             for (let i = open; i < close; i++) {
-                html += `<div class="hour">${i}:00</div>`;
+                html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
             }
+            html += "</div>";
             return html;
         }
     }

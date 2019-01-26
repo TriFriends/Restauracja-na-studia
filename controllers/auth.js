@@ -14,6 +14,7 @@ exports.loginUser = (req, res) => {
             else {
                 req.session.isLogged = true;
                 req.session.name = result.firstname + ' ' + result.lastname;
+                req.session.email = result.email;
                 req.session.isAdmin = result.admin;
                 res.redirect('/');
             }
