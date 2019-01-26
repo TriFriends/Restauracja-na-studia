@@ -60,6 +60,21 @@ class OrderRepo {
             })
         })
     }
+
+    static deleteOrderById(number, id) {
+        return new Promise((resolve, reject) => {
+            TableModel.updateOne(
+                { number },
+                { $pull: { reservations: { _id: id } } },
+                { safe: true }, (err, obj) => {
+                    if (err) {
+                        reject()
+                    }
+                    resolve()
+                })
+        })
+    }
+
 }
 
 module.exports = OrderRepo

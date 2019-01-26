@@ -20,7 +20,7 @@ exports.order = (req, res) => {
     ordersRepo.checkAvaiable(date, time, table).then(() => {
         usersRepo.findUserByEmail(email).then((user) => {
             console.log(user, '120')
-            ordersRepo.addOrder(table, { user, date, time }).then(() => {
+            ordersRepo.addOrder(table, { user, order: { date, time } }).then(() => {
                 res.redirect('/');
             }).catch(() => {
                 res.status(400).send('n1')
