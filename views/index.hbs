@@ -37,7 +37,7 @@
 
             </tr>
             {{else}}
-            <tr class="selectTable" onclick="selectTable({{number}})">
+            <tr class="selectTable" onclick="selectTable('{{_id}}')">
                 <td>{{number}}</td>
                 <td>{{seats}}</td>
             </tr>
@@ -63,16 +63,19 @@
             <tr>
                 <td colspan="3">Rezerwacje</td>
             </tr>
-            {{#if isChosen}}
+            {{#if isSelected}}
             <tr>
-                <th>
-                    wstecz
-                </th>
-                <th>
-                    {{date}}
-                </th>
-                <th> przód </th>
-                </wstecz>
+                <td colspan="3">
+                    <form method="POST">
+                        <button formaction="/" name="day" value="-1">Wstecz</button>
+                        {{date}}
+                        <button formaction="/" name="day" value="1">Przód</button>
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input type="hidden" name="last" value="{{last}}">
+                    </form>
+                </td>
+
+                {{{renderCalendar reservations open close}}}
             </tr>
             {{else}}
             <tr>

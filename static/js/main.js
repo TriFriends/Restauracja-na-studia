@@ -70,16 +70,16 @@ function editMenu(me) {
     tr.children[4].children[0].innerText = "Wróć"
 }
 
-function selectTable(nr) {
+function selectTable(id) {
     let form = document.createElement('form');
     form.style.display = "none";
     form.method = "POST";
-    form.action = "http://localhost:3000/select-table";
+    form.action = "http://localhost:3000";
     form.innerHTML = `
-        <input type="hidden" name="nr" value="${nr}">
+        <input type="hidden" name="id" value="${id}">
         <button type="submit"></button>
     `;
-    console.log(nr);
+    console.log(id);
 
     document.body.appendChild(form)
     form.submit();

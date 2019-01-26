@@ -7,7 +7,7 @@ class TableRepo {
                 if (err) {
                     reject()
                 }
-                console.log(tables);
+
 
                 resolve(tables)
             })

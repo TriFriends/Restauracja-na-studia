@@ -26,13 +26,11 @@ exports.getTables = async (req, res) => {
 }
 
 
-exports.selectTable = (req, res) => {
-    console.log(req.body.nr);
+exports.selectTable = async (req, res) => {
 
-    tablesRepo.getTableByNumber(req.body.nr)
+    return await tablesRepo.getTableByNumber(req.body.nr)
         .then(table => {
-            console.log(table);
-
+            return table
         }).catch(() => {
 
         })
