@@ -10,26 +10,88 @@
             <tr>
                 <th>Numer</th>
                 <th>Miejsca</th>
+
             </tr>
-            {{#each tables}}
+
+            {{#if error}}
             <tr>
+                <td colspan="2" style="padding:0">
+                    <div style="width:100%" class="error">{{error}}</div>
+                </td>
+            </tr>
+            {{/if}}
+            {{#each tables}}
+
+
+            {{#if ../isAdmin}}
+            <tr class="editTable">
+                <td colspan="2">
+                    <form method="POST">
+                        <input type="number" name="number" value="{{number}}">
+                        <input type="number" name="seats" value="{{seats}}">
+                        <input type="hidden" name="id" value="{{_id}}">
+                        <button type="submit" formaction="/edit-table">Zapisz</button>
+                        <button type="submit" formaction="/delete-table">Usuń</button>
+                    </form>
+                </td>
+
+            </tr>
+            {{else}}
+
+            <tr class="selectTable {{#if selected}}selected{{/if}}" onclick="selectTable('{{_id}}')">
                 <td>{{number}}</td>
                 <td>{{seats}}</td>
             </tr>
+            {{/if}}
             {{/each}}
+
+            {{#if isAdmin}}
+            <tr class="editTable">
+                <td colspan="2">
+                    <form method="POST" action="/add-table">
+                        <input type="number" name="number" value="{{number}}">
+                        <input type="number" name="seats" value="{{seats}}">
+                        <button style="width:185px" type="submit">Dodaj</button>
+                    </form>
+                </td>
+            </tr>
+            {{/if}}
         </table>
     </div>
 
     <div class="nextTo">
         <table id="reservationTab">
             <tr>
-                <td>Rezerwacje</td>
+                <td colspan="3">Rezerwacje</td>
             </tr>
+            {{#if isSelected}}
             <tr>
-                <th>
-                    Dz
+                <th colspan="3">
+                    <form method="POST">
+                        <button formaction="/" name="day" value="-1">Wstecz</button>
+                        {{date}}
+                        <button formaction="/" name="day" value="1">Przód</button>
+                        <input type="hidden" name="id" value="{{tableId}}">
+                        <input type="hidden" name="last" value="{{last}}">
+                    </form>
                 </th>
+            <tr>
+                <td>
+                    <form method="POST">
+                        {{{renderCalendar reservations open close}}}
+                        <input type="hidden" name="tableNumber" value="{{tableNumber}}">
+                        <input type="hidden" name="tableId" value="{{tableId}}">
+                        <input type="hidden" name="date" value="{{date}}">
+                    </form>
+                </td>
             </tr>
+            </tr>
+            {{else}}
+            <tr>
+                <td>Wybierz Stolik</td>
+            </tr>
+
+            {{/if}}
         </table>
 
     </div>

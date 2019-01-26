@@ -2,7 +2,7 @@
 
 exports.ensureisLogged = (req, res, next) => {
 
-    if (req.session.isLoged) {
+    if (req.session.isLogged) {
         next();
     }
     else {

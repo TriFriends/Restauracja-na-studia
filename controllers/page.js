@@ -1,15 +1,92 @@
 const menuRepo = require('../repositories/menuRepo')
 const tablesRepo = require('../repositories/tablesRepo')
+const configRepo = require('../repositories/restaurantConfigRepo');
+const dateFormat = require('../utils/date')
+exports.getStartPage = async (req, res) => {
 
-exports.getStartPage = (req, res) => {
+    let error = req.flash('error-index');
+    if (error.length <= 0) {
+        error = null;
+    }
+
+    let selected = req.flash('selected-index');
+    if (selected.length <= 0) {
+        selected = undefined;
+    }
+
+    let id;
+
+    if (selected) {
+        id = selected;
+    }
+    else {
+        id = req.body.id;
+    }
+    let last = Number(req.body.last);
+
+    if (!last) {
+        last = 0;
+
+    }
+
+    if (req.body.day)
+        last += Number(req.body.day);
+
+    let selectedTable;
+
+    if (id) {
+
+
+        selectedTable = await tablesRepo.getTable(id)
+            .then(table => {
+                console.log(table);
+
+                return table;
+
+            }).catch(() => {
+                console.log('errrrrrrrrrrrrrrrrr');
+
+            })
+    }
 
     tablesRepo.getTables()
         .then(tables => {
-            res.render('index.hbs', {
-                tables: tables
-            })
+            if (id) {
+                for (let t of tables) {
+
+                    if (t.number == selectedTable.number) {
+                        t.selected = true;
+
+                    }
+                }
+            }
+
+
+
+            let context = {
+                tables: tables,
+                isAdmin: req.session.isAdmin,
+                error: error,
+                last: 0
+            }
+
+            if (id) {
+                context.isSelected = true;
+                context.date = dateFormat.getDateAfterDay(dateFormat.getCurrentDate(), last);
+                context.reservations = selectedTable.reservations;
+                context.open = 11;
+                context.close = 22;
+                context.tableId = id;
+                context.tableNumber = selectedTable.number;
+                context.last = last;
+
+            }
+
+            res.render('index.hbs', context)
+
+
         }).catch(err => {
-            console.log('error in page');
+            res.send(err + 'PROBLEM Z SERWEREM');
 
         })
 

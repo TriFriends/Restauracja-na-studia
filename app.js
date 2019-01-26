@@ -17,6 +17,17 @@ app.engine('hbs', hbs({
     defaultLayout: 'main.hbs',
     extname: '.hbs',
     partialsDir: "views/partials",
+    helpers: {
+        renderCalendar: function (reservations, open, close) {
+            console.log('heloper' + reservations);
+            let html = '<div class="hour-container">';
+            for (let i = open; i < close; i++) {
+                html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+            }
+            html += "</div>";
+            return html;
+        }
+    }
 }));
 app.set('view engine', 'hbs');
 

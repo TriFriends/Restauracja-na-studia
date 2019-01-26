@@ -3,12 +3,14 @@ const pageController = require('../controllers/page');
 const authController = require('../controllers/auth');
 const menuController = require('../controllers/menu');
 const tablesController = require('../controllers/tables');
+const ordersController = require('../controllers/orders');
 
 const MW = require('../controllers/middleware')
 
 const router = express.Router();
 
 router.get('/', pageController.getStartPage);
+router.post('/', pageController.getStartPage);
 router.get('/login', pageController.getLoginPage);
 router.get('/menu', pageController.getMenuPage);
 router.get('/registration', pageController.getRegistrationPage);
@@ -21,5 +23,13 @@ router.get('/logout', authController.logout)
 router.post('/menu/delete-dish', MW.ensureIsAdmin, menuController.deleteDish);
 router.post('/menu/add-dish', MW.ensureIsAdmin, menuController.addDish);
 router.post('/menu/edit-dish', MW.ensureIsAdmin, menuController.editDish);
+
+router.post('/select-table', pageController.getStartPage);
+router.post('/add-table', MW.ensureIsAdmin, tablesController.addTable)
+router.post('/edit-table', MW.ensureIsAdmin, tablesController.editTable)
+router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
+
+router.post('/order', MW.ensureisLogged, ordersController.order);
+
 module.exports = router;
 
