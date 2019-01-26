@@ -41,10 +41,14 @@ exports.registerUser = (req, res) => {
     //że konto już istnieje
     //Przykład:
     /*
-    UserRepos.findUserByEmail(req.body.email).then((user) => {
-        console.log(user, '120')
-        OrderRepo.addOrder(req.body.number, { user, ...req.body.order }).then(() => {
-            res.send()
+    OrderRepo.checkAvaiable(req.body.order.date, req.body.order.time, req.body.number).then(() => {
+        UserRepos.findUserByEmail(req.body.email).then((user) => {
+            console.log(user, '120')
+            OrderRepo.addOrder(req.body.number, { user, ...req.body.order }).then(() => {
+                res.send()
+            }).catch(() => {
+                res.status(400).send()
+            })
         }).catch(() => {
             res.status(400).send()
         })

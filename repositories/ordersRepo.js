@@ -32,6 +32,18 @@ class OrderRepo {
         })
     }
 
+    static checkAvaiable(date, time, number) {
+        return new Promise((resolve, reject) => {
+            TableModel.findOne({ 'reservations.date': date, 'reservations.time': time, number }, { 'reservations.$': 1 }, (err, result) => {
+                console.log(result)
+                if (err || result) {
+                    reject()
+                }
+                resolve()
+            })
+        })
+    }
+
     static findOrders() {
         return new Promise((resolve, reject) => {
             TableModel.find({}, (err, tables) => {
