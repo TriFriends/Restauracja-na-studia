@@ -7,6 +7,9 @@ let restaurantConfigSchema = new Schema({
     },
     close: {
         type: String
+    },
+    maxDayAhead: {
+        type: Number
     }
 })
 

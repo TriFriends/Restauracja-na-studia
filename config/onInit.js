@@ -42,7 +42,8 @@ module.exports = () => {
         if (count == 0) {
             RestaurantConfig.create({
                 open: '11',
-                close: '22'
+                close: '22',
+                maxDayAhead: 3
             })
         }
     })

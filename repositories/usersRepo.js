@@ -36,6 +36,32 @@ class UserRepo {
         })
     }
 
+    static updateUserById(id, toUpdate) {
+        return new Promise((resolve, reject) => {
+            UsersModel.updateOne({ _id: id },
+                { $set: toUpdate },
+                (err, raw) => {
+                    console.log(raw)
+                    if (err || raw.n == 0) {
+                        reject()
+                    }
+                    resolve()
+                }
+            )
+        })
+    }
+
+    static deleteUserById(id) {
+        return new Promise((resolve, reject) => {
+            UsersModel.deleteOne({ _id: id }, (err) => {
+                if (err) {
+                    reject()
+                }
+                resolve()
+            })
+        })
+    }
+
 }
 
 module.exports = UserRepo
