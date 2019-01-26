@@ -9,9 +9,19 @@ exports.getStartPage = async (req, res) => {
         error = null;
     }
 
+    let selected = req.flash('selected-index');
+    if (selected.length <= 0) {
+        selected = undefined;
+    }
 
+    let id;
 
-    let id = req.body.id;
+    if (selected) {
+        id = selected;
+    }
+    else {
+        id = req.body.id;
+    }
     let last = Number(req.body.last);
 
     if (!last) {
@@ -29,6 +39,8 @@ exports.getStartPage = async (req, res) => {
 
         selectedTable = await tablesRepo.getTable(id)
             .then(table => {
+                console.log(table);
+
                 return table;
 
             }).catch(() => {
@@ -65,6 +77,7 @@ exports.getStartPage = async (req, res) => {
                 context.open = 11;
                 context.close = 22;
                 context.tableId = id;
+                context.tableNumber = selectedTable.number;
                 context.last = last;
 
             }
