@@ -50,7 +50,7 @@ class OrderRepo {
                                 result[i].reservations[k].date == date &&
                                 result[i].number == number
                             ) {
-                                reject()
+                                reject(result[i].reservations[k].user.email)
                             }
                         }
                     }
