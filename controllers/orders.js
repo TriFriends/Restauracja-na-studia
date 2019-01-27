@@ -16,7 +16,7 @@ exports.order = (req, res) => {
     //Przykład:
     req.flash('selected-index', tableId);
     req.flash('last-index', last);
-    //ordersRepo.checkAvaiable(date, time, table).then(() => {
+    // ordersRepo.checkAvaiable(date, time, table).then(() => {
     usersRepo.findUserByEmail(email).then((user) => {
         ordersRepo.addOrder(table, { user, date, time }).then(() => {
             res.redirect('/');
