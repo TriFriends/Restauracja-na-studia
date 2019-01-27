@@ -20,6 +20,7 @@ router.get('/contact', pageController.getContactPage)
 router.post('/login/login-user', authController.loginUser);
 router.post('/registration/register-user', authController.registerUser);
 router.get('/logout', authController.logout)
+router.get('/admin', MW.ensureIsAdmin, pageController.getAdminPage);
 
 router.post('/menu/delete-dish', MW.ensureIsAdmin, menuController.deleteDish);
 router.post('/menu/add-dish', MW.ensureIsAdmin, menuController.addDish);
@@ -32,6 +33,7 @@ router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
 
 router.post('/order', MW.ensureisLogged, ordersController.order);
 router.post('/contact/update', MW.ensureIsAdmin, contactController.update)
+
 
 module.exports = router;
 

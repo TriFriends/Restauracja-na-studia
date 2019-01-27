@@ -1,0 +1,28 @@
+<div id="admin">
+    <h1>Panel Administracyjny</h1>
+
+    <div class="content">
+        <table border="1">
+            <tr>
+                <td>lp.</td>
+                <td>Imię</td>
+                <td>Nazwisko</td>
+                <td>Email</td>
+                <td>Telefon</td>
+                <td></td>
+            </tr>
+            {{#each users}}
+            <tr>
+                <td>{{@index}}</td>
+                <td>{{firstname}}</td>
+                <td>{{lastname}}</td>
+                <td>{{email}}</td>
+                <td>{{phone}}</td>
+                <td>
+                    <form><button formaction="/admin/delete-user" name="id" value="{{_id}}">Usuń</button></form>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>

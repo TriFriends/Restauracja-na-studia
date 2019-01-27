@@ -214,3 +214,20 @@ body table .input>* {
     border-color: rgb(9, 159, 228);
     background: white;
 }
+
+#admin h1 {
+    padding: 40px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    background: rgb(9, 159, 228);
+    color: white;
+}
+
+#admin .content {
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+#admin table {}

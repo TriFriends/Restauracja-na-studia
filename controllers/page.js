@@ -1,6 +1,7 @@
 const menuRepo = require('../repositories/menuRepo')
 const tablesRepo = require('../repositories/tablesRepo')
 const configRepo = require('../repositories/restaurantConfigRepo');
+const usersRepo = require('../repositories/usersRepo');
 const dateFormat = require('../utils/date')
 const contactRepo = require('../repositories/contactRepo');
 
@@ -168,6 +169,19 @@ exports.getContactPage = (req, res) => {
         })
         .catch(() => {
 
+        })
+
+}
+
+exports.getAdminPage = (req, res) => {
+
+    usersRepo.findUsers()
+        .then((users) => {
+
+            res.render('admin.hbs', { users: users });
+        })
+        .catch(() => {
+            res.redirect('/');
         })
 
 }
