@@ -40,7 +40,7 @@ class OrderRepo {
                 if (table) {
                     for (let i = 0; i < table.reservations.length; i++) {
                         if (table.reservations[i].date == date && table.reservations[i].time == time) {
-                            reject()
+                            reject({ email: table.reservations[i].user.email, id: table.reservations[i]._id })
                         }
                     }
                 }
