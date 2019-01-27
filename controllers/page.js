@@ -2,6 +2,9 @@ const menuRepo = require('../repositories/menuRepo')
 const tablesRepo = require('../repositories/tablesRepo')
 const configRepo = require('../repositories/restaurantConfigRepo');
 const dateFormat = require('../utils/date')
+const contactRepo = require('../repositories/contactRepo');
+
+
 exports.getStartPage = async (req, res) => {
 
     let error = req.flash('error-index');
@@ -153,5 +156,18 @@ exports.getResetPasswordPage = (req, res) => {
 }
 
 exports.getContactPage = (req, res) => {
-    res.render('contact.hbs');
+
+    contactRepo.getAll()
+        .then(contact => {
+            console.log(contact);
+            let context = {
+                contact: contact[0],
+                isAdmin: req.session.isAdmin
+            }
+            res.render('contact.hbs', context);
+        })
+        .catch(() => {
+
+        })
+
 }

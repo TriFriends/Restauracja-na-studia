@@ -2,17 +2,17 @@ const TableModel = require('../models/tables').Table
 
 class OrderRepo {
     static addOrder(number, order) {
-        //console.log(order)
+        console.log(order, '22')
         return new Promise((resolve, reject) => {
             TableModel.update({ number },
                 {
                     $push: {
-                        reservations: order.order
+                        reservations: order
                     }
                 },
                 (err, raw) => {
                     if (err || raw.n == 0) {
-                        // console.log(raw)
+                        console.log(err)
                         reject()
                     }
                     resolve()
@@ -34,9 +34,10 @@ class OrderRepo {
 
     static checkAvaiable(date, time, number) {
         return new Promise((resolve, reject) => {
-            TableModel.findOne({ 'reservations.date': date, 'reservations.time': time, number }, { 'reservations.$': 1 }, (err, result) => {
-                // console.log(result)
+            TableModel.findOne({ $and: [{ 'reservations.date': date }, { 'reservations.time': time }, { number }] }, { 'reservations.$': 1 }, (err, result) => {
+                console.log(result)
                 if (err || result) {
+                    console.log(err)
                     reject()
                 }
                 resolve()

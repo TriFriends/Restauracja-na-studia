@@ -4,6 +4,7 @@ const authController = require('../controllers/auth');
 const menuController = require('../controllers/menu');
 const tablesController = require('../controllers/tables');
 const ordersController = require('../controllers/orders');
+const contactController = require('../controllers/contact');
 
 const MW = require('../controllers/middleware')
 
@@ -30,6 +31,7 @@ router.post('/edit-table', MW.ensureIsAdmin, tablesController.editTable)
 router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
 
 router.post('/order', MW.ensureisLogged, ordersController.order);
+router.post('/contact/update', MW.ensureIsAdmin, contactController.update)
 
 module.exports = router;
 

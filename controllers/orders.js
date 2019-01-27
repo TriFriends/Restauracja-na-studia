@@ -2,8 +2,6 @@ const ordersRepo = require('../repositories/ordersRepo');
 const usersRepo = require('../repositories/usersRepo')
 
 exports.order = (req, res) => {
-    // console.log(req.body);
-    // console.log(req.session)
 
     let time = req.body.time;
     let date = req.body.date;
@@ -11,8 +9,6 @@ exports.order = (req, res) => {
     let table = req.body.tableNumber;
     let tableId = req.body.tableId;
     let last = req.body.last;
-    console.log('--------------------------------')
-    console.log(time, date, email, table, tableId, last);
 
     //Tutaj musisz jeszcze wywołać metodę usersRepo.findUserByEmail i tutaj jest wystąpi coś nietypowego:
     //gdy wystąpi catch to masz dodać do bazy danych użytkownika, jeśli wystąpi then to wtedy masz wywołać:
@@ -20,8 +16,7 @@ exports.order = (req, res) => {
     //Przykład:
     req.flash('selected-index', tableId);
     req.flash('last-index', last);
-
-    // ordersRepo.checkAvaiable(date, time, table).then(() => {
+    //ordersRepo.checkAvaiable(date, time, table).then(() => {
     usersRepo.findUserByEmail(email).then((user) => {
         ordersRepo.addOrder(table, { user, date, time }).then(() => {
             res.redirect('/');
@@ -29,7 +24,7 @@ exports.order = (req, res) => {
             res.status(400).send('n1')
         })
     }).catch(() => {
-        res.status(400).send('n2')
+        res.status(400).send('n1')
     })
     // }).catch((err) => {
     //     //console.log('errr', err);

@@ -163,3 +163,54 @@ body table .input>* {
 .profil-button img {
     width: 100%;
 }
+
+#contact h1 {
+    padding: 40px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    background: rgb(9, 159, 228);
+    color: white;
+}
+
+#contact .content {
+    width: 800px;
+    background: rgb(64, 64, 65);
+    padding: 40px;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#contact .content h3 {
+    display: block;
+    padding: 5px;
+    font-weight: 500;
+    color: white;
+}
+
+#contact .content input {
+    display: block;
+    padding: 10px 30px;
+    font-weight: 500;
+    background: rgb(64, 64, 65);
+    color: white;
+    border: 1px solid white;
+    width: 350px;
+    margin: 0 auto;
+    outline: none;
+}
+
+#contact .content input[type="submit"] {
+    background: rgb(9, 159, 228);
+    border: 2px solid rgb(9, 159, 228);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#contact .content input[type="submit"]:hover {
+    color: rgb(9, 159, 228);
+    border-color: rgb(9, 159, 228);
+    background: white;
+}
