@@ -34,11 +34,27 @@ class OrderRepo {
 
     static checkAvaiable(date, time, number) {
         return new Promise((resolve, reject) => {
-            TableModel.findOne({ $and: [{ 'reservations.date': date }, { 'reservations.time': time }, { number }] }, { 'reservations.$': 1 }, (err, result) => {
-                console.log(result)
-                if (err || result) {
-                    console.log(err)
+            TableModel.find({
+                'reservations.date': date,
+                'reservations.time': time,
+                number
+            }, (err, result) => {
+                if (err) {
                     reject()
+                }
+                if (result.length != 0) {
+                    for (let i = 0; i < result.length; i++) {
+                        for (let k = 0; k < result[i].reservations.length; k++) {
+                            if (
+                                result[i].reservations[k].time == time &&
+                                result[i].reservations[k].date == date &&
+                                result[i].number == number
+                            ) {
+                                reject()
+                            }
+                        }
+                    }
+                    resolve()
                 }
                 resolve()
             })
