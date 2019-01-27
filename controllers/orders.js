@@ -21,21 +21,21 @@ exports.order = (req, res) => {
     req.flash('selected-index', tableId);
     req.flash('last-index', last);
 
-    ordersRepo.checkAvaiable(date, time, table).then(() => {
-        usersRepo.findUserByEmail(email).then((user) => {
-            ordersRepo.addOrder(table, { user, order: { date, time } }).then(() => {
-                res.redirect('/');
-            }).catch(() => {
-                res.status(400).send('n1')
-            })
+    // ordersRepo.checkAvaiable(date, time, table).then(() => {
+    usersRepo.findUserByEmail(email).then((user) => {
+        ordersRepo.addOrder(table, { user, date, time }).then(() => {
+            res.redirect('/');
         }).catch(() => {
-            res.status(400).send('n2')
+            res.status(400).send('n1')
         })
-    }).catch((err) => {
-        //console.log('errr', err);
-
-        res.redirect('/?a=2');
+    }).catch(() => {
+        res.status(400).send('n2')
     })
+    // }).catch((err) => {
+    //     //console.log('errr', err);
+
+    //     res.redirect('/?a=2');
+    // })
 
 
 }
