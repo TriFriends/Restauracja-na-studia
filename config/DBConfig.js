@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const onInit = require('./onInit')
+const OnInit = require('./OnInit')
 
 
 class DBConfig {
@@ -13,7 +13,9 @@ class DBConfig {
                 process.exit(1)
             }
             console.log(`[MONGODB] Connected to instance on ${this.MONGODB_URI}`)
-            onInit()
+            OnInit.addAdminOnStart()
+            OnInit.addDefaultContactOnStart()
+            OnInit.addDefaultRestaurantConfigOnStart()
         });
     }
 }
