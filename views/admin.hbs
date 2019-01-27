@@ -4,12 +4,15 @@
     <div class="content">
         <table border="1">
             <tr>
-                <td>lp.</td>
-                <td>Imię</td>
-                <td>Nazwisko</td>
-                <td>Email</td>
-                <td>Telefon</td>
-                <td></td>
+                <td colspan="6">Użytkownicy</td>
+            </tr>
+            <tr>
+                <th>lp.</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th></th>
             </tr>
             {{#each users}}
             <tr>
@@ -18,8 +21,8 @@
                 <td>{{lastname}}</td>
                 <td>{{email}}</td>
                 <td>{{phone}}</td>
-                <td>
-                    <form><button formaction="/admin/delete-user" name="id" value="{{_id}}">Usuń</button></form>
+                <td class="button">
+                    <form method="POST"><button formaction="/admin/delete-user" name="id" value="{{_id}}">Usuń</button></form>
                 </td>
             </tr>
             {{/each}}

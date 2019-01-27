@@ -3,7 +3,9 @@
     <a href="/">Home</a>
     <a href="/contact">Kontakt</a>
     <a href="/menu">Menu</a>
+    {{#if isAdmin}}
     <a href="/admin">Admin</a>
+    {{/if}}
     <div style="float:right">
         {{#if isLogged}}
         <a class="profil-button"><img src="/gfx/person.png" alt="Profil"></a>

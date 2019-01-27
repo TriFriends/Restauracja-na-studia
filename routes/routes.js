@@ -5,6 +5,7 @@ const menuController = require('../controllers/menu');
 const tablesController = require('../controllers/tables');
 const ordersController = require('../controllers/orders');
 const contactController = require('../controllers/contact');
+const adminController = require('../controllers/admin');
 
 const MW = require('../controllers/middleware')
 
@@ -34,6 +35,6 @@ router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
 router.post('/order', MW.ensureisLogged, ordersController.order);
 router.post('/contact/update', MW.ensureIsAdmin, contactController.update)
 
-
+router.post('/admin/delete-user', MW.ensureIsAdmin, adminController.deleteUser);
 module.exports = router;
 

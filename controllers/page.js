@@ -178,7 +178,7 @@ exports.getAdminPage = (req, res) => {
     usersRepo.findUsers()
         .then((users) => {
 
-            res.render('admin.hbs', { users: users });
+            res.render('admin.hbs', { users: users, isAdmin: req.session.isAdmin });
         })
         .catch(() => {
             res.redirect('/');

@@ -32,6 +32,7 @@
                         <input type="hidden" name="id" value="{{_id}}">
                         <button type="submit" formaction="/edit-table">Zapisz</button>
                         <button type="submit" formaction="/delete-table">Usuń</button>
+                        <button type="submit" formaction="/">Wybierz</button>
                     </form>
                 </td>
 
@@ -51,7 +52,7 @@
                     <form method="POST" action="/add-table">
                         <input type="number" name="number" value="{{number}}">
                         <input type="number" name="seats" value="{{seats}}">
-                        <button style="width:185px" type="submit">Dodaj</button>
+                        <button style="width:250px" type="submit">Dodaj</button>
                     </form>
                 </td>
             </tr>
@@ -78,7 +79,7 @@
             <tr>
                 <td>
                     <form method="POST">
-                        {{{renderCalendar reservations date open close email}}}
+                        {{{renderCalendar reservations date open close email isAdmin}}}
                         <input type="hidden" name="tableNumber" value="{{tableNumber}}">
                         <input type="hidden" name="last" value="{{last}}">
                         <input type="hidden" name="tableId" value="{{tableId}}">

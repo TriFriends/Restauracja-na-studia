@@ -225,9 +225,68 @@ body table .input>* {
 }
 
 #admin .content {
-    width: 800px;
+    min-width: 1200px;
     margin: 0 auto;
     margin-top: 40px;
 }
 
-#admin table {}
+#admin table {
+    min-width: 600px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    color: white;
+}
+
+#admin table tr:first-child {
+    font-size: 20px;
+    font-weight: 500;
+    cursor: auto;
+}
+
+#admin table tr:nth-child(2) {
+    cursor: auto;
+}
+
+#admin th {
+    background: rgb(9, 159, 228);
+    padding: 20px;
+}
+
+#admin table tr {
+    background: rgb(75, 75, 75);
+    border: 5px solid white;
+}
+
+#admin table .selectTable:hover {
+    transition: 0.5s;
+    transform: scale(0.98);
+    cursor: pointer;
+}
+
+#admin table td {
+    padding: 15px;
+}
+
+#admin table td.button {
+    padding: 0px;
+}
+
+#admin table button {
+    height: 50px;
+    width: 90px;
+    font-size: 15px;
+    color: white;
+    background: rgba(11, 216, 107, 0.911);
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+    border: 1px solid;
+    padding: 5px;
+}
+
+#admin table button:hover {
+    color: rgba(11, 216, 107, 0.911);
+    background: white;
+    border-color: rgba(11, 216, 107, 0.911);
+}
