@@ -18,11 +18,24 @@ app.engine('hbs', hbs({
     extname: '.hbs',
     partialsDir: "views/partials",
     helpers: {
-        renderCalendar: function (reservations, open, close) {
+        renderCalendar: function (reservations, date, open, close, email) {
             console.log('heloper' + reservations);
             let html = '<div class="hour-container">';
             for (let i = open; i < close; i++) {
-                html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+                let occupied = false;
+                for (let reserv of reservations) {
+
+
+                    if (reserv.date == date && reserv.time == i) {
+                        occupied = true;
+                    }
+                }
+                if (occupied) {
+                    html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00</button>`
+                }
+                else {
+                    html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+                }
             }
             html += "</div>";
             return html;

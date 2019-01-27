@@ -2,7 +2,7 @@ const TableModel = require('../models/tables').Table
 
 class OrderRepo {
     static addOrder(number, order) {
-        console.log(order)
+        //console.log(order)
         return new Promise((resolve, reject) => {
             TableModel.update({ number },
                 {
@@ -12,7 +12,7 @@ class OrderRepo {
                 },
                 (err, raw) => {
                     if (err || raw.n == 0) {
-                        console.log(raw)
+                        // console.log(raw)
                         reject()
                     }
                     resolve()
@@ -35,7 +35,7 @@ class OrderRepo {
     static checkAvaiable(date, time, number) {
         return new Promise((resolve, reject) => {
             TableModel.findOne({ 'reservations.date': date, 'reservations.time': time, number }, { 'reservations.$': 1 }, (err, result) => {
-                console.log(result)
+                // console.log(result)
                 if (err || result) {
                     reject()
                 }

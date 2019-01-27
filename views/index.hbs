@@ -78,8 +78,9 @@
             <tr>
                 <td>
                     <form method="POST">
-                        {{{renderCalendar reservations open close}}}
+                        {{{renderCalendar reservations date open close email}}}
                         <input type="hidden" name="tableNumber" value="{{tableNumber}}">
+                        <input type="hidden" name="last" value="{{last}}">
                         <input type="hidden" name="tableId" value="{{tableId}}">
                         <input type="hidden" name="date" value="{{date}}">
                     </form>

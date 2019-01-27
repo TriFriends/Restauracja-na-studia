@@ -32,6 +32,14 @@ exports.getStartPage = async (req, res) => {
     if (req.body.day)
         last += Number(req.body.day);
 
+    let lastFlash = req.flash('last-index');
+    if (lastFlash.length > 0) {
+        console.log(lastFlash + '  lldddd');
+
+        last = Number(lastFlash);
+    }
+    // console.log(id, ' ', last, ' ', selected);
+
     let selectedTable;
 
     if (id) {
@@ -39,7 +47,7 @@ exports.getStartPage = async (req, res) => {
 
         selectedTable = await tablesRepo.getTable(id)
             .then(table => {
-                console.log(table);
+                // console.log(table);
 
                 return table;
 
@@ -47,6 +55,7 @@ exports.getStartPage = async (req, res) => {
                 console.log('errrrrrrrrrrrrrrrrr');
 
             })
+
     }
 
     tablesRepo.getTables()
@@ -60,6 +69,7 @@ exports.getStartPage = async (req, res) => {
                     }
                 }
             }
+            tables = tables.sort((a, b) => a.number - b.number)
 
 
 
@@ -71,6 +81,10 @@ exports.getStartPage = async (req, res) => {
             }
 
             if (id) {
+
+                // let config = await configRepo.getAll();
+                // console.log();
+
                 context.isSelected = true;
                 context.date = dateFormat.getDateAfterDay(dateFormat.getCurrentDate(), last);
                 context.reservations = selectedTable.reservations;
@@ -79,6 +93,7 @@ exports.getStartPage = async (req, res) => {
                 context.tableId = id;
                 context.tableNumber = selectedTable.number;
                 context.last = last;
+                context.email = req.session.email;
 
             }
 

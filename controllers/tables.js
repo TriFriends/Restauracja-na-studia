@@ -15,7 +15,7 @@ exports.addTable = (req, res) => {
 exports.getTables = async (req, res) => {
     return await tablesRepo.getTables()
         .then(tables => {
-            console.log(tables);
+            //console.log(tables);
 
             return tables;
         })
