@@ -19,7 +19,6 @@ app.engine('hbs', hbs({
     partialsDir: "views/partials",
     helpers: {
         renderCalendar: function (reservations, date, open, close, email) {
-            console.log('heloper' + reservations);
             let html = '<div class="hour-container">';
             for (let i = open; i < close; i++) {
                 let occupied = false;

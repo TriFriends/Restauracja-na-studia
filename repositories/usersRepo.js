@@ -29,6 +29,7 @@ class UserRepo {
         return new Promise((resolve, reject) => {
             UsersModel.findOne({ email }, (err, user) => {
                 if (err || !user) {
+                    console.log(err)
                     reject()
                 }
                 resolve(user)
@@ -41,7 +42,6 @@ class UserRepo {
             UsersModel.updateOne({ _id: id },
                 { $set: toUpdate },
                 (err, raw) => {
-                    console.log(raw)
                     if (err || raw.n == 0) {
                         reject()
                     }

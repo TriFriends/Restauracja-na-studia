@@ -37,7 +37,6 @@ exports.selectTable = async (req, res) => {
 }
 
 exports.editTable = (req, res) => {
-    console.log(req.body.id);
 
     tablesRepo.updateById(req.body.id, { number: Number(req.body.number), seats: Number(req.body.seats) })
         .then(table => {

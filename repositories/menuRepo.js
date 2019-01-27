@@ -16,7 +16,6 @@ class MenuRepository {
     static updateById(id, doc) {
         return new Promise((resolve, reject) => {
             MenuModel.updateOne({ _id: id }, doc, (err, raw) => {
-                console.log(raw)
                 if (err || raw.n == 0) {
                     reject()
                 }
