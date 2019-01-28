@@ -74,7 +74,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('static'));
 
 app.use(flash());
-
+const mailer = require('./utils/mailer').init();
 app.use((req, res, next) => {
     res.locals.isLogged = req.session.isLogged;
     res.locals.name = req.session.name;

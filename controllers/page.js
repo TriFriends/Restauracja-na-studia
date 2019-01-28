@@ -63,7 +63,7 @@ exports.getStartPage = async (req, res) => {
     }
 
     tablesRepo.getTables()
-        .then(tables => {
+        .then(async tables => {
             if (id) {
                 for (let t of tables) {
 
@@ -86,14 +86,34 @@ exports.getStartPage = async (req, res) => {
 
             if (id) {
 
-                // let config = await configRepo.getAll();
-                // console.log();
+                let config = await configRepo.getAll();
+                console.log(config);
+                context.next = true;
+                context.prev = true;
+
+                if (last <= 0) {
+                    last = 0;
+                    context.next = true;
+                    context.prev = false;
+                }
+
+                if (last > config[0].maxDayAhead - 1) {
+                    last = config[0].maxDayAhead;
+                    context.next = false;
+                    context.prev = true;
+                }
+
+                if (config[0].maxDayAhead <= 0) {
+                    last = 0;
+                    context.next = false;
+                    context.prev = false;
+                }
 
                 context.isSelected = true;
                 context.date = dateFormat.getDateAfterDay(dateFormat.getCurrentDate(), last);
                 context.reservations = selectedTable.reservations;
-                context.open = 11;
-                context.close = 22;
+                context.open = config[0].open;
+                context.close = config[0].close;
                 context.tableId = id;
                 context.tableNumber = selectedTable.number;
                 context.last = last;
@@ -153,7 +173,7 @@ exports.getRegistrationPage = (req, res) => {
 }
 
 exports.getResetPasswordPage = (req, res) => {
-    res.render('resetPassword.hbs');
+    res.render('resetPassword.hbs', { token: null });
 }
 
 exports.getContactPage = (req, res) => {
@@ -173,12 +193,12 @@ exports.getContactPage = (req, res) => {
 
 }
 
-exports.getAdminPage = (req, res) => {
-
+exports.getAdminPage = async (req, res) => {
+    let config = await configRepo.getAll();
     usersRepo.findUsers()
         .then((users) => {
 
-            res.render('admin.hbs', { users: users, isAdmin: req.session.isAdmin });
+            res.render('admin.hbs', { users: users, isAdmin: req.session.isAdmin, open: config[0].open, close: config[0].close, maxDayAhead: config[0].maxDayAhead, id: config[0]._id });
         })
         .catch(() => {
             res.redirect('/');

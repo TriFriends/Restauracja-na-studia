@@ -1,4 +1,7 @@
 const usersRepo = require('../repositories/usersRepo');
+const mailer = require('../utils/mailer').getTransporter();
+const jwt = require('jsonwebtoken');
+const secretKey = '123ABC';
 
 exports.loginUser = (req, res) => {
 
@@ -62,5 +65,107 @@ exports.logout = (req, res) => {
             console.log(err)
         }
         res.redirect('/');
+    })
+}
+
+exports.resetPassword = (req, res) => {
+
+    let email = req.body.mail;
+
+    let data = {
+        user: email
+    }
+
+    jwt.sign(data, secretKey, { expiresIn: 60 * 60 * 60 }, (err, token) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(email);
+
+            mailer.sendMail({
+                to: email,
+                from: 'restauracjanastudia@gmail.com',
+                subject: 'Restauracja - Reset Hasła',
+                html: `
+                                <h1>Resetowanie hasła</h1>
+                                <h3>Witaj, Jeśli chcesz zresetować hasło kliknij link poniżej.</h3>
+                                <a href="http://localhost:3000/reset-password/verify/${token}">Resetuj hasło</a>
+                            `
+            })
+                .then(result => {
+                    console.log(result);
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    })
+    req.flash('message', 'Wysłano maila z linkiem do resetu hasła!')
+    res.redirect('/reset-password');
+
+
+}
+
+
+
+
+
+exports.getResetPasswordVerifyPage = (req, res) => {
+    let token = req.params.token;
+
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            console.log(err);
+            res.send('<h1>Sesja wygasła!</h1>');
+        }
+        else {
+            console.log(decoded);
+            res.render('resetPassword', { token: token });
+        }
+    })
+
+}
+
+exports.resetPasswordNewType = (req, res) => {
+    const token = req.body.token;
+    const password = req.body.password;
+
+    if (password != req.body.password2) {
+        res.render('resetPassword', { token: token });
+        return;
+    }
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            console.log(err);
+            res.send('<h1>Sesja wygasła!</h1>');
+            return;
+        }
+        else {
+            console.log('tu');
+            console.log(decoded);
+
+            usersRepo.findUserByEmail(decoded.user).then(user => {
+                console.log(user);
+                usersRepo.updateUserById(user._id, { firstname: user.firstname, lastname: user.lastname, phone: user.phone, email: user.email, password: password })
+                    .then(() => {
+                        console.log('updated');
+                        req.flash('accountCreated', 'Zmieniono Hasło!')
+                        res.redirect('/login');
+
+                    })
+                    .catch(() => {
+                        console.log(err);
+                        res.send('<h1>Nastąpił problem!</h1>');
+                    })
+            })
+                .catch(() => {
+                    console.log(err);
+                    res.send('<h1>Nastąpił problem!</h1>');
+                });
+
+
+        }
     })
 }

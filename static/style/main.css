@@ -196,22 +196,22 @@ body table .input>* {
     font-weight: 500;
     background: rgb(64, 64, 65);
     color: white;
-    border: 1px solid white;
+    border: 1px solid rgb(9, 159, 228);
     width: 350px;
     margin: 0 auto;
     outline: none;
 }
 
 #contact .content input[type="submit"] {
-    background: rgb(9, 159, 228);
-    border: 2px solid rgb(9, 159, 228);
+    background: rgba(11, 216, 107, 0.911);
+    border: 2px solid rgba(11, 216, 107, 0.911);
     cursor: pointer;
     transition: 0.5s;
 }
 
 #contact .content input[type="submit"]:hover {
-    color: rgb(9, 159, 228);
-    border-color: rgb(9, 159, 228);
+    color: rgba(11, 216, 107, 0.911);
+    border-color: rgba(11, 216, 107, 0.911);
     background: white;
 }
 
@@ -286,6 +286,49 @@ body table .input>* {
 }
 
 #admin table button:hover {
+    color: rgba(11, 216, 107, 0.911);
+    background: white;
+    border-color: rgba(11, 216, 107, 0.911);
+}
+
+#admin .config {
+    width: 600px;
+    margin: 0 auto;
+    background: rgb(75, 75, 75);
+    padding: 20px;
+    text-align: center;
+}
+
+#admin .config label {
+    text-align: left;
+    margin: 10px auto;
+    display: block;
+    width: 300px;
+    color: white;
+}
+
+#admin .config input {
+    margin-right: 30px;
+    padding: 10px;
+    width: 80px;
+    outline: none;
+}
+
+#admin .config button {
+    margin-top: 20px;
+    height: 50px;
+    width: 300px;
+    font-size: 15px;
+    color: white;
+    background: rgba(11, 216, 107, 0.911);
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+    border: 1px solid rgba(11, 216, 107, 0.911);
+    padding: 5px;
+}
+
+#admin .config button:hover {
     color: rgba(11, 216, 107, 0.911);
     background: white;
     border-color: rgba(11, 216, 107, 0.911);

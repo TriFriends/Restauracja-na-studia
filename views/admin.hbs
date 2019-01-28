@@ -2,6 +2,17 @@
     <h1>Panel Administracyjny</h1>
 
     <div class="content">
+        <div class="config">
+            <form method="POST" action="/admin/config">
+                <label><input placeholder="" type="number" name="open" value="{{open}}"> Otwarcie</label>
+                <label><input placeholder="" type="number" name="close" value="{{close}}"> Zamknięcie</label>
+                <label><input placeholder="" type="number" name="maxDayAhead" value="{{maxDayAhead}}"> Rezerwacji do
+                    Przodu</label>
+                <input type="hidden" name="id" value="{{id}}">
+                <button type="submit">Zapisz</button>
+            </form>
+        </div>
+
         <table border="1">
             <tr>
                 <td colspan="6">Użytkownicy</td>
