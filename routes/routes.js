@@ -4,6 +4,8 @@ const authController = require('../controllers/auth');
 const menuController = require('../controllers/menu');
 const tablesController = require('../controllers/tables');
 const ordersController = require('../controllers/orders');
+const contactController = require('../controllers/contact');
+const adminController = require('../controllers/admin');
 
 const MW = require('../controllers/middleware')
 
@@ -19,6 +21,11 @@ router.get('/contact', pageController.getContactPage)
 router.post('/login/login-user', authController.loginUser);
 router.post('/registration/register-user', authController.registerUser);
 router.get('/logout', authController.logout)
+router.get('/admin', MW.ensureIsAdmin, pageController.getAdminPage);
+
+router.post('/reset-password/reset', authController.resetPassword);
+router.get('/reset-password/verify/:token', authController.getResetPasswordVerifyPage);
+router.post('/reset-password/change', authController.resetPasswordNewType);
 
 router.post('/menu/delete-dish', MW.ensureIsAdmin, menuController.deleteDish);
 router.post('/menu/add-dish', MW.ensureIsAdmin, menuController.addDish);
@@ -30,6 +37,9 @@ router.post('/edit-table', MW.ensureIsAdmin, tablesController.editTable)
 router.post('/delete-table', MW.ensureIsAdmin, tablesController.deleteTable)
 
 router.post('/order', MW.ensureisLogged, ordersController.order);
+router.post('/contact/update', MW.ensureIsAdmin, contactController.update)
 
+router.post('/admin/delete-user', MW.ensureIsAdmin, adminController.deleteUser);
+router.post('/admin/config', MW.ensureIsAdmin, adminController.config);
 module.exports = router;
 

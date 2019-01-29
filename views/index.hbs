@@ -24,7 +24,7 @@
 
 
             {{#if ../isAdmin}}
-            <tr class="editTable">
+            <tr class="editTable {{#if selected}}selected{{/if}}">
                 <td colspan="2">
                     <form method="POST">
                         <input type="number" name="number" value="{{number}}">
@@ -32,6 +32,7 @@
                         <input type="hidden" name="id" value="{{_id}}">
                         <button type="submit" formaction="/edit-table">Zapisz</button>
                         <button type="submit" formaction="/delete-table">Usuń</button>
+                        <button type="submit" formaction="/">Wybierz</button>
                     </form>
                 </td>
 
@@ -51,7 +52,7 @@
                     <form method="POST" action="/add-table">
                         <input type="number" name="number" value="{{number}}">
                         <input type="number" name="seats" value="{{seats}}">
-                        <button style="width:185px" type="submit">Dodaj</button>
+                        <button style="width:250px" type="submit">Dodaj</button>
                     </form>
                 </td>
             </tr>
@@ -68,9 +69,9 @@
             <tr>
                 <th colspan="3">
                     <form method="POST">
-                        <button formaction="/" name="day" value="-1">Wstecz</button>
+                        <button {{#unless prev}} style="visibility:hidden" {{/unless}} formaction="/" name="day" value="-1">Wstecz</button>
                         {{date}}
-                        <button formaction="/" name="day" value="1">Przód</button>
+                        <button {{#unless next}} style="visibility:hidden" {{/unless}} formaction="/" name="day" value="1">Przód</button>
                         <input type="hidden" name="id" value="{{tableId}}">
                         <input type="hidden" name="last" value="{{last}}">
                     </form>
@@ -78,7 +79,7 @@
             <tr>
                 <td>
                     <form method="POST">
-                        {{{renderCalendar reservations date open close email}}}
+                        {{{renderCalendar reservations date open close email isAdmin}}}
                         <input type="hidden" name="tableNumber" value="{{tableNumber}}">
                         <input type="hidden" name="last" value="{{last}}">
                         <input type="hidden" name="tableId" value="{{tableId}}">

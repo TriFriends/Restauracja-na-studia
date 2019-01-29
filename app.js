@@ -18,22 +18,40 @@ app.engine('hbs', hbs({
     extname: '.hbs',
     partialsDir: "views/partials",
     helpers: {
-        renderCalendar: function (reservations, date, open, close, email) {
+        renderCalendar: function (reservations, date, open, close, email, isAdmin) {
             let html = '<div class="hour-container">';
             for (let i = open; i < close; i++) {
                 let occupied = false;
+                let my = false;
+                let reservuser = '';
                 for (let reserv of reservations) {
+                    console.log(reservations);
 
 
                     if (reserv.date == date && reserv.time == i) {
                         occupied = true;
+                        reservuser = reserv.user.firstname + ' ' + reserv.user.lastname;
+                        if (reserv.user.email == email) {
+                            my = true;
+                        }
                     }
+
                 }
-                if (occupied) {
-                    html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00</button>`
+                if (my) {
+                    html += `<button formaction="/order" class="hour my" name="time" value="${i}">${i}:00 <br/>Moja<br/>Rezerwacja</button>`
                 }
                 else {
-                    html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+
+                    if (occupied) {
+                        html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00`;
+                        if (isAdmin) {
+                            html += '<br/>' + reservuser;
+                        }
+                        html += '</button>';
+                    }
+                    else {
+                        html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+                    }
                 }
             }
             html += "</div>";
@@ -56,7 +74,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('static'));
 
 app.use(flash());
-
+const mailer = require('./utils/mailer').init();
 app.use((req, res, next) => {
     res.locals.isLogged = req.session.isLogged;
     res.locals.name = req.session.name;
