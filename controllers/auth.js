@@ -2,6 +2,7 @@ const usersRepo = require('../repositories/usersRepo');
 const mailer = require('../utils/mailer').getTransporter();
 const jwt = require('jsonwebtoken');
 const secretKey = '123ABC';
+const bcrypt = require('bcryptjs')
 
 exports.loginUser = (req, res) => {
 
@@ -46,6 +47,7 @@ exports.registerUser = (req, res) => {
             req.flash('error-registration', 'Konto już istnieje.')
             res.redirect('/registration');
         }).catch(() => {
+
             usersRepo.addUser({ firstname: d.firstname, lastname: d.lastname, email: d.email, phone: d.phone, password: d.password }).then(() => {
                 req.flash('accountCreated', 'Konto zostało utworzone.')
                 res.redirect('/login');
@@ -136,36 +138,41 @@ exports.resetPasswordNewType = (req, res) => {
         res.render('resetPassword', { token: token });
         return;
     }
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if (err) {
-            console.log(err);
-            res.send('<h1>Sesja wygasła!</h1>');
-            return;
-        }
-        else {
-            console.log('tu');
-            console.log(decoded);
-
-            usersRepo.findUserByEmail(decoded.user).then(user => {
-                console.log(user);
-                usersRepo.updateUserById(user._id, { firstname: user.firstname, lastname: user.lastname, phone: user.phone, email: user.email, password: password })
-                    .then(() => {
-                        console.log('updated');
-                        req.flash('accountCreated', 'Zmieniono Hasło!')
-                        res.redirect('/login');
-
-                    })
-                    .catch(() => {
-                        console.log(err);
-                        res.send('<h1>Nastąpił problem!</h1>');
-                    })
-            })
-                .catch(() => {
+    bcrypt.genSalt(3, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hashed) => {
+            jwt.verify(token, secretKey, (err, decoded) => {
+                if (err) {
                     console.log(err);
-                    res.send('<h1>Nastąpił problem!</h1>');
-                });
+                    res.send('<h1>Sesja wygasła!</h1>');
+                    return;
+                }
+                else {
+                    console.log('tu');
+                    console.log(decoded);
+
+                    usersRepo.findUserByEmail(decoded.user).then(user => {
+                        console.log(user);
+                        usersRepo.updateUserById(user._id, { firstname: user.firstname, lastname: user.lastname, phone: user.phone, email: user.email, password: hashed })
+                            .then(() => {
+                                console.log('updated');
+                                req.flash('accountCreated', 'Zmieniono Hasło!')
+                                res.redirect('/login');
+
+                            })
+                            .catch(() => {
+                                console.log(err);
+                                res.send('<h1>Nastąpił problem!</h1>');
+                            })
+                    })
+                        .catch(() => {
+                            console.log(err);
+                            res.send('<h1>Nastąpił problem!</h1>');
+                        });
 
 
-        }
+                }
+            })
+        })
     })
+
 }
