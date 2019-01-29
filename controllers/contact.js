@@ -12,6 +12,7 @@ exports.update = (req, res) => {
 
     contactRepo.update(req.body.id, { firstname: firstname, lastname: lastname, email: email, phone: phone, street: street })
         .then(() => {
+            req.flash('message-contact', 'Zapisano zmiany!')
             res.redirect('/contact');
         })
         .catch(() => {

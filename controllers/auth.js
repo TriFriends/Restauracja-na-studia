@@ -102,7 +102,7 @@ exports.resetPassword = (req, res) => {
                 })
         }
     })
-    req.flash('message', 'Wysłano maila z linkiem do resetu hasła!')
+    req.flash('message-reset', 'Wysłano maila z linkiem do resetu hasła!')
     res.redirect('/reset-password');
 
 
@@ -133,6 +133,7 @@ exports.resetPasswordNewType = (req, res) => {
     const password = req.body.password;
 
     if (password != req.body.password2) {
+        req.flash('error-reset', 'Hasła nie są identyczne!')
         res.render('resetPassword', { token: token });
         return;
     }

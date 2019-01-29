@@ -153,6 +153,7 @@ exports.getMenuPage = (req, res) => {
 
     menuRepo.getAll()
         .then(result => {
+
             let context = {
                 dishes: result,
                 isAdmin: req.session.isAdmin,
@@ -173,17 +174,35 @@ exports.getRegistrationPage = (req, res) => {
 }
 
 exports.getResetPasswordPage = (req, res) => {
-    res.render('resetPassword.hbs', { token: null });
+
+    let error = req.flash('error-reset');
+    let message = req.flash('message-reset');
+
+    if (error.length <= 0) {
+        error = null;
+    }
+
+    if (message.length <= 0) {
+        message = null;
+    }
+
+    res.render('resetPassword.hbs', { token: null, error: error, message: message });
 }
 
 exports.getContactPage = (req, res) => {
 
+    let message = req.flash('message-contact');
+
+    if (message.length <= 0) {
+        message = null;
+    }
     contactRepo.getAll()
         .then(contact => {
             console.log(contact);
             let context = {
                 contact: contact[0],
-                isAdmin: req.session.isAdmin
+                isAdmin: req.session.isAdmin,
+                message: message
             }
             res.render('contact.hbs', context);
         })
