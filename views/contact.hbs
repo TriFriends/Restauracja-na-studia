@@ -20,7 +20,12 @@
             </h3>
             <input type="hidden" name="id" value="{{contact._id}}">
             <input type="submit" value="Zapisz">
+
+            {{#if message}}
+            <div style="width:350px; margin-top:10px;" class="message">{{message}}</div>
+            {{/if}}
         </form>
+
     </div>
     {{else}}
     <div class="content">
