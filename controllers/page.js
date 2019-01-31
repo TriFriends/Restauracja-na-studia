@@ -38,11 +38,9 @@ exports.getStartPage = async (req, res) => {
 
     let lastFlash = req.flash('last-index');
     if (lastFlash.length > 0) {
-        console.log(lastFlash + '  lldddd');
 
         last = Number(lastFlash);
     }
-    // console.log(id, ' ', last, ' ', selected);
 
     let selectedTable;
 
@@ -51,14 +49,10 @@ exports.getStartPage = async (req, res) => {
 
         selectedTable = await tablesRepo.getTable(id)
             .then(table => {
-                // console.log(table);
 
                 return table;
 
-            }).catch(() => {
-                console.log('errrrrrrrrrrrrrrrrr');
-
-            })
+            }).catch(() => { })
 
     }
 
@@ -87,7 +81,6 @@ exports.getStartPage = async (req, res) => {
             if (id) {
 
                 let config = await configRepo.getAll();
-                console.log(config);
                 context.next = true;
                 context.prev = true;
 
@@ -198,7 +191,6 @@ exports.getContactPage = (req, res) => {
     }
     contactRepo.getAll()
         .then(contact => {
-            console.log(contact);
             let context = {
                 contact: contact[0],
                 isAdmin: req.session.isAdmin,

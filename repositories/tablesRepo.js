@@ -64,7 +64,6 @@ class TableRepo {
             TableModel.update({ _id: id },
                 { $set: toUpdate },
                 (err, raw) => {
-                    console.log(raw)
                     if (err || raw.n == 0) {
                         reject()
                     }

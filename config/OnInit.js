@@ -20,7 +20,6 @@ class OnInit {
     static addDefaultRestaurantConfigOnStart() {
         RestaurantConfig.countDocuments({}, (err, count) => {
             if (err) {
-                console.log(err)
                 process.exit(1)
             }
             if (count == 0) {
@@ -35,7 +34,6 @@ class OnInit {
     static addDefaultContactOnStart() {
         Contact.countDocuments({}, (err, count) => {
             if (err) {
-                console.log(err)
                 process.exit(1)
             }
             if (count == 0) {

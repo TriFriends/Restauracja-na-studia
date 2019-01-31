@@ -80,10 +80,10 @@ exports.resetPassword = (req, res) => {
 
     jwt.sign(data, secretKey, { expiresIn: 60 * 60 * 60 }, (err, token) => {
         if (err) {
-            console.log(err);
+            console.log(err)
         }
         else {
-            console.log(email);
+
 
             mailer.sendMail({
                 to: email,
@@ -96,11 +96,9 @@ exports.resetPassword = (req, res) => {
                             `
             })
                 .then(result => {
-                    console.log(result);
-
                 })
                 .catch(err => {
-                    console.log(err);
+
                 })
         }
     })
@@ -123,7 +121,6 @@ exports.getResetPasswordVerifyPage = (req, res) => {
             res.send('<h1>Sesja wygasła!</h1>');
         }
         else {
-            console.log(decoded);
             res.render('resetPassword', { token: token });
         }
     })
@@ -148,14 +145,10 @@ exports.resetPasswordNewType = (req, res) => {
                     return;
                 }
                 else {
-                    console.log('tu');
-                    console.log(decoded);
 
                     usersRepo.findUserByEmail(decoded.user).then(user => {
-                        console.log(user);
                         usersRepo.updateUserById(user._id, { firstname: user.firstname, lastname: user.lastname, phone: user.phone, email: user.email, password: hashed })
                             .then(() => {
-                                console.log('updated');
                                 req.flash('accountCreated', 'Zmieniono Hasło!')
                                 res.redirect('/login');
 

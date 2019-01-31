@@ -29,18 +29,6 @@ const userSchema = new Schema({
     }
 })
 
-// userSchema.methods.comparePassword = async function (passwordToCheck) {
-//     return await bcrypt.compare(passwordToCheck, this.password, function (err, isMatch) {
-//         if (err || !isMatch) {
-//             console.log(err, '36');
-
-//             return false
-//         }
-//         console.log(isMatch, '40');
-//         return true
-//     })
-// }
-
 userSchema.methods.comparePassword = function (candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
         if (err) return cb(err);

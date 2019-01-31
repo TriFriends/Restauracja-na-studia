@@ -10,7 +10,6 @@ class Mailer {
                 api_key: 'SG.L9wvW2p7Rr2zeTIbVsz7Hw.E4dEMoKVi8mcOO4zqiSzjcW1Pnhk5M224ooJBlls9g8'
             }
         }))
-        console.log(transporter);
 
         return transporter;
     }

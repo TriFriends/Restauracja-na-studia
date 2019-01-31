@@ -7,9 +7,6 @@ exports.update = (req, res) => {
     let phone = req.body.phone;
     let street = req.body.street;
 
-    console.log(req.body);
-
-
     contactRepo.update(req.body.id, { firstname: firstname, lastname: lastname, email: email, phone: phone, street: street })
         .then(() => {
             req.flash('message-contact', 'Zapisano zmiany!')

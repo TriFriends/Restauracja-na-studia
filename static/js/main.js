@@ -79,7 +79,6 @@ function selectTable(id) {
         <input type="hidden" name="id" value="${id}">
         <button type="submit"></button>
     `;
-    console.log(id);
 
     document.body.appendChild(form)
     form.submit();

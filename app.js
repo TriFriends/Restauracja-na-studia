@@ -25,9 +25,6 @@ app.engine('hbs', hbs({
                 let my = false;
                 let reservuser = '';
                 for (let reserv of reservations) {
-                    console.log(reservations);
-
-
                     if (reserv.date == date && reserv.time == i) {
                         occupied = true;
                         reservuser = reserv.user.firstname + ' ' + reserv.user.lastname;
@@ -86,8 +83,7 @@ app.use('/', routes);
 
 
 app.listen(PORT, () => {
-    console.log(`Server started on port`);
+    console.log(`Server started on port ${PORT}`);
 });
-
 
 
