@@ -9,7 +9,9 @@ const DBConfig = require('./config/DBConfig')
 const PORT = 3000;
 const app = express();
 
+//Utworzenie obiektu klasy DBConfig i przekazanie mu adresu bazy danych
 let dbConnection = new DBConfig(MONGODB_URI)
+//wywołanie metody connect obiektu dbConnection w celu połączenia się z bazą danych
 dbConnection.connect()
 
 app.set('views', path.join(__dirname, 'views'));
@@ -81,7 +83,7 @@ const routes = require('./routes/routes')
 app.use('/', routes);
 
 
-
+//Startowanie apliacji na danym porcie
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });

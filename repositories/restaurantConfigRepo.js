@@ -1,5 +1,6 @@
 const RestaurantConfigModel = require('../models/restaurantConfig').RestaurantConfig
 
+//Repozytorium które służy do kontaktu z kolekcją restaurantConfig
 class RestaurantConfigRepo {
     static getAll() {
         return new Promise((resolve, reject) => {

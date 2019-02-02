@@ -1,6 +1,6 @@
 const UsersModel = require('../models/users').User
 
-
+//Repozytorium które służy do kontaktu z kolekcją User
 class UserRepo {
     static addUser(user) {
         return new Promise((resolve, reject) => {
