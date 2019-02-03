@@ -1,6 +1,7 @@
 const contactRepo = require('../repositories/contactRepo');
 
 exports.update = (req, res) => {
+    //zaktualizowanie informacji o kontakcie
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let email = req.body.email;

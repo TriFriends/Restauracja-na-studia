@@ -1,13 +1,14 @@
 
 
 class DateForm {
-
+    //funkcja zwraca datę
     static getCurrentDate() {
         let date = new Date();
         return this.format(date);
 
     }
 
+    //funkcja zwraca datę równą dacie obecnej + ilosci dni do przodu
     static getDateAfterDay(date, day) {
         let sdate = this.transformToStandardDate(date);
         sdate.setDate(sdate.getDate() + day);
@@ -15,11 +16,13 @@ class DateForm {
         return this.format(sdate);
     }
 
+    //funkcja transformuje datę do normalnego typu DATE w JavaScript
     static transformToStandardDate(date) {
         let dateChunk = date.split('.');
         return new Date(dateChunk[2] + '-' + dateChunk[1] + '-' + dateChunk[0]);
     }
 
+    //funkcja transformuje datę na bardziej czytelną
     static format(d) {
         let date = d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
         let dateChunk = date.split('.');

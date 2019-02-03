@@ -1,7 +1,7 @@
 
 
 exports.ensureisLogged = (req, res, next) => {
-
+    //sprawdzanie czy użytkownik jest zalogowany
     if (req.session.isLogged) {
         next();
     }
@@ -13,7 +13,7 @@ exports.ensureisLogged = (req, res, next) => {
 
 
 exports.ensureIsAdmin = (req, res, next) => {
-
+    //sprawdzanie czy użytkownik jest administratorem
     if (req.session.isAdmin) {
         next();
     }

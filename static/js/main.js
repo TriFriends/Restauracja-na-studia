@@ -1,6 +1,8 @@
 
 let editingTr = undefined;
 let editingTrHTML;
+
+
 function editMenu(me) {
 
 
@@ -11,7 +13,7 @@ function editMenu(me) {
         if (me.innerText == 'Zapisz') {
             let name = me.parentElement.parentElement.children[1].children[0].value;
             let price = me.parentElement.parentElement.children[2].children[0].value;
-            form.action = "http://localhost:3000/menu/edit-dish"
+            form.action = "/menu/edit-dish"
             form.innerHTML = `
                 <input name="name" value="${name}">
                 <input name="price" value="${price}">
@@ -25,7 +27,7 @@ function editMenu(me) {
 
         }
         else {
-            form.action = "http://localhost:3000/menu/delete-dish"
+            form.action = "/menu/delete-dish"
             form.innerHTML = `
                 <input name="id" value="${me.value}">
                 <button type="submit">Wyslij</button>
@@ -74,7 +76,7 @@ function selectTable(id) {
     let form = document.createElement('form');
     form.style.display = "none";
     form.method = "POST";
-    form.action = "http://localhost:3000";
+    form.action = "/";
     form.innerHTML = `
         <input type="hidden" name="id" value="${id}">
         <button type="submit"></button>

@@ -2,7 +2,7 @@ const ordersRepo = require('../repositories/ordersRepo');
 const usersRepo = require('../repositories/usersRepo')
 
 exports.order = (req, res) => {
-
+    //rezerwacja stolika
     let time = req.body.time;
     let date = req.body.date;
     let email = req.session.email;

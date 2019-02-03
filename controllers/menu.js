@@ -1,7 +1,7 @@
 const menu = require('../repositories/menuRepo');
 
 exports.deleteDish = (req, res) => {
-
+    //usuwanie pozycji z menu
     menu.deleteById(req.body.id).then(() => {
         res.redirect('/menu');
     }).catch(err => {
@@ -12,6 +12,7 @@ exports.deleteDish = (req, res) => {
 }
 
 exports.addDish = (req, res) => {
+    //dodanie pozycji do menu
     let price = Number(req.body.price);
     price = parseInt(price * 100) / 100
     price = price.toFixed(2)
@@ -26,7 +27,7 @@ exports.addDish = (req, res) => {
 }
 
 exports.editDish = (req, res) => {
-
+    //edycja pozycji w menu
     menu.updateById(req.body.id, { name: req.body.name, price: parseInt(req.body.price * 100) / 100 }).then(result => {
         res.redirect('/menu');
     }).catch(err => {

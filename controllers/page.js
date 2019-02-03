@@ -7,7 +7,7 @@ const contactRepo = require('../repositories/contactRepo');
 
 
 exports.getStartPage = async (req, res) => {
-
+    //wyświetlenie strony główniej
     let error = req.flash('error-index');
     if (error.length <= 0) {
         error = null;
@@ -125,6 +125,7 @@ exports.getStartPage = async (req, res) => {
 }
 
 exports.getLoginPage = (req, res) => {
+    //wyświetlenie strony logowania
     let error = req.flash('error-login');
     let message = req.flash('accountCreated');
 
@@ -139,6 +140,7 @@ exports.getLoginPage = (req, res) => {
 }
 
 exports.getMenuPage = (req, res) => {
+    //Strona menu 
     let error = req.flash('error-menu');
     if (error.length <= 0) {
         error = null;
@@ -158,6 +160,7 @@ exports.getMenuPage = (req, res) => {
 }
 
 exports.getRegistrationPage = (req, res) => {
+    //wyświetlenie strony resetującej hasło
     let error = req.flash('error-registration');
     if (error.length <= 0) {
         error = null;
@@ -167,7 +170,7 @@ exports.getRegistrationPage = (req, res) => {
 }
 
 exports.getResetPasswordPage = (req, res) => {
-
+    //resetowanie hasła
     let error = req.flash('error-reset');
     let message = req.flash('message-reset');
 
@@ -183,7 +186,7 @@ exports.getResetPasswordPage = (req, res) => {
 }
 
 exports.getContactPage = (req, res) => {
-
+    //wyświetlenie strony kontakt
     let message = req.flash('message-contact');
 
     if (message.length <= 0) {
@@ -205,6 +208,7 @@ exports.getContactPage = (req, res) => {
 }
 
 exports.getAdminPage = async (req, res) => {
+    //wyświetlenie strony admin
     let config = await configRepo.getAll();
     usersRepo.findUsers()
         .then((users) => {

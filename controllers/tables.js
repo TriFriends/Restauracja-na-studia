@@ -1,7 +1,7 @@
 const tablesRepo = require('../repositories/tablesRepo');
 
 exports.addTable = (req, res) => {
-
+    //dodanie stolika
     tablesRepo.addTable({ number: Number(req.body.number), seats: Number(req.body.seats) })
         .then(result => {
             res.redirect('/');
@@ -13,6 +13,7 @@ exports.addTable = (req, res) => {
 };
 
 exports.getTables = async (req, res) => {
+    //otrzymanie wszystkich stolików
     return await tablesRepo.getTables()
         .then(tables => {
             return tables;
@@ -25,7 +26,7 @@ exports.getTables = async (req, res) => {
 
 
 exports.selectTable = async (req, res) => {
-
+    //wybór stolika
     return await tablesRepo.getTableByNumber(req.body.nr)
         .then(table => {
             return table
@@ -35,7 +36,7 @@ exports.selectTable = async (req, res) => {
 }
 
 exports.editTable = (req, res) => {
-
+    //edycja stolika
     tablesRepo.updateById(req.body.id, { number: Number(req.body.number), seats: Number(req.body.seats) })
         .then(table => {
             res.redirect('/');
@@ -47,7 +48,7 @@ exports.editTable = (req, res) => {
 }
 
 exports.deleteTable = (req, res) => {
-
+    //usuwanie stolika
     tablesRepo.deleteById(req.body.id)
         .then(table => {
             res.redirect('/');

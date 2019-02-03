@@ -5,7 +5,7 @@ const secretKey = '123ABC';
 const bcrypt = require('bcryptjs')
 
 exports.loginUser = (req, res) => {
-
+    //logowanie użytkownika
     let email = req.body.mail;
     let password = req.body.password;
 
@@ -32,6 +32,7 @@ exports.loginUser = (req, res) => {
 }
 
 exports.registerUser = (req, res) => {
+    //rejestracja użytkownika
     let data = req.body;
 
     if (data.password !== data.password2) {
@@ -62,6 +63,7 @@ exports.registerUser = (req, res) => {
 }
 
 exports.logout = (req, res) => {
+    //wylogowanie użytkownika
     req.session.destroy(err => {
         if (err) {
             console.log(err)
@@ -71,7 +73,7 @@ exports.logout = (req, res) => {
 }
 
 exports.resetPassword = (req, res) => {
-
+    //wysłanie emaila z linkiem do resetowania hasła
     let email = req.body.mail;
 
     let data = {
@@ -113,6 +115,7 @@ exports.resetPassword = (req, res) => {
 
 
 exports.getResetPasswordVerifyPage = (req, res) => {
+    //wyświetlenie strony do resetowania hasłą
     let token = req.params.token;
 
     jwt.verify(token, secretKey, (err, decoded) => {
@@ -128,6 +131,7 @@ exports.getResetPasswordVerifyPage = (req, res) => {
 }
 
 exports.resetPasswordNewType = (req, res) => {
+    //resetowanie hasła przez link z emaila
     const token = req.body.token;
     const password = req.body.password;
 
