@@ -1,5 +1,5 @@
 const TableModel = require('../models/tables').Table
-
+const { Types: { ObjectId } } = require("mongoose")
 
 //rezerwacja = zamówienie , czasami mówię zamiennie, ale chodzi o to samo
 
@@ -73,17 +73,23 @@ class OrderRepo {
     //zrobione na zapas, nigdzie nie używane
     static findOrders() {
         return new Promise((resolve, reject) => {
-            TableModel.find({}, (err, tables) => {
-                if (err) {
-                    reject()
-                }
-                let reservations = []
-                for (let i = 0; i < tables.length; i++) {
-                    for (let k = 0; k < tables[i].reservations.length; k++) {
-                        reservations.push(tables[i].reservations[k])
+            TableModel.aggregate([
+                {
+                    $unwind: "$reservations"
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        userId: "$reservations.user._id",
+                        menuOrder: "$reservations.menuOrder",
+                        number: 1
                     }
                 }
-                resolve(reservations)
+            ]).then((docs) => {
+                resolve(docs)
+            }).catch((err) => {
+                console.log(err)
+                reject()
             })
         })
     }
@@ -105,6 +111,58 @@ class OrderRepo {
                     resolve()
                 })
         })
+    }
+
+    static addMenuOrderToOrder(number, orderId, menuOrder) {
+        let orderId = ObjectId(orderId)
+        return new Promise((resolve, reject) => {
+            TableModel.updateOne(
+                {
+                    number: number,
+                    "reservations._id": orderId
+                },
+                {
+                    $set: {
+                        "reservations.$.menuOrder": menuOrder
+                    }
+                },
+                (err, raw) => {
+                    if (err || raw.n == 0) {
+                        reject()
+                    }
+                    resolve()
+                })
+        })
+    }
+
+    static findOrdersByUserId(userId) {
+        let userId = ObjectId(userId)
+        return new Promise((resolve, reject) => {
+            TableModel.aggregate([
+                {
+                    $unwind: "$reservations"
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        userId: "$reservations.user._id",
+                        menuOrder: "$reservations.menuOrder",
+                        number: 1
+                    }
+                },
+                {
+                    $match: {
+                        userId: userId
+                    }
+                }
+            ]).then((docs) => {
+                resolve(docs)
+            }).catch((err) => {
+                console.log(err)
+                reject()
+            })
+        })
+
     }
 
 }

@@ -18,6 +18,7 @@ class DBConfig {
             OnInit.addAdminOnStart()
             OnInit.addDefaultContactOnStart()
             OnInit.addDefaultRestaurantConfigOnStart()
+            OnInit.addDefaultTablesOnStart()
         });
     }
 }
