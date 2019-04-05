@@ -4,10 +4,18 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://admin:admin18@ds111065.mlab.com:11065/restaurant'
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/restaurant"
+//'mongodb://admin:admin18@ds111065.mlab.com:11065/restaurant'
 const DBConfig = require('./config/DBConfig')
 const PORT = 3000;
 const app = express();
+
+//wyłączenie crashowania się aplikacji przy wyrzucaniu własnych wyjątków !!!
+//bardzo ważne
+process.on('uncaughtException', function (err) {
+    console.error(err);
+    console.log("Node NOT Exiting...");
+});
 
 //Utworzenie obiektu klasy DBConfig i przekazanie mu adresu bazy danych
 let dbConnection = new DBConfig(MONGODB_URI)
@@ -71,6 +79,8 @@ app.use(session({
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('static'));
+
+
 
 app.use(flash());
 const mailer = require('./utils/mailer').init();
