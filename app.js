@@ -9,7 +9,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/restau
 const DBConfig = require('./config/DBConfig')
 const PORT = 3000;
 const app = express();
-
+//update
 //wyłączenie crashowania się aplikacji przy wyrzucaniu własnych wyjątków !!!
 //bardzo ważne
 process.on('uncaughtException', function (err) {
