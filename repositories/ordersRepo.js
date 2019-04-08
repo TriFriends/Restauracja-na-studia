@@ -76,15 +76,8 @@ class OrderRepo {
             TableModel.aggregate([
                 {
                     $unwind: "$reservations"
-                },
-                {
-                    $project: {
-                        _id: 0,
-                        userId: "$reservations.user._id",
-                        menuOrder: "$reservations.menuOrder",
-                        number: 1
-                    }
                 }
+
             ]).then((docs) => {
                 resolve(docs)
             }).catch((err) => {

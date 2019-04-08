@@ -17,6 +17,7 @@ const orderSchema = new Schema({
     user: userSchema,
     menuOrder: {
         type: Object,
+        required: true,
         default: {
 
         }

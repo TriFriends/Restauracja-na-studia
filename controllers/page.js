@@ -4,7 +4,7 @@ const configRepo = require('../repositories/restaurantConfigRepo');
 const usersRepo = require('../repositories/usersRepo');
 const dateFormat = require('../utils/date')
 const contactRepo = require('../repositories/contactRepo');
-
+const ordersRepo = require('../repositories/ordersRepo');
 
 exports.getStartPage = async (req, res) => {
     //wyświetlenie strony główniej
@@ -219,4 +219,46 @@ exports.getAdminPage = async (req, res) => {
             res.redirect('/');
         })
 
+}
+
+exports.orderDishes = (req, res) => {
+    console.log(req.body);
+    if (req.body == {}) {
+        res.redirect('/');
+    }
+
+    menuRepo.getAll()
+        .then(result => {
+
+            let error = req.flash('error-order');
+            if (error.length <= 0) {
+                error = null;
+            }
+            let context = {
+                dishes: result,
+                error: error,
+                reservData: req.body,
+                isAdmin: req.session.isAdmin
+            }
+
+            res.render('orderDishes.hbs', context);
+        })
+
+
+}
+
+exports.getOrdersPage = (req, res) => {
+    ordersRepo.findOrders().then(orders => {
+        console.log(orders);
+
+        let context = {
+            isAdmin: req.session.isAdmin,
+            orders: orders
+        }
+        res.render('orders.hbs', context);
+
+    }).catch(err => {
+        console.log(err);
+
+    })
 }

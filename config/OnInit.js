@@ -39,13 +39,18 @@ class OnInit {
     //Sprawdza czy w kolekcji contacts istnieje przynajmniej 1 dokument
     //jeśli nie to go dodaje
     static addDefaultContactOnStart() {
-        Contact.create({
-            firstname: '',
-            lastname: '',
-            email: '',
-            phone: '',
-            street: ''
+        Contact.count({}, (error, count) => {
+            if (count == 0) {
+                Contact.create({
+                    firstname: '',
+                    lastname: '',
+                    email: '',
+                    phone: '',
+                    street: ''
+                })
+            }
         })
+
     }
 
     static addDefaultTablesOnStart() {

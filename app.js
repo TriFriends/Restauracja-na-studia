@@ -50,14 +50,14 @@ app.engine('hbs', hbs({
                 else {
 
                     if (occupied) {
-                        html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00`;
+                        html += `<button onclick="event.preventDefault()" class="hour occupied" name="time" value="${i}">${i}:00`;
                         if (isAdmin) {
                             html += '<br/>' + reservuser;
                         }
                         html += '</button>';
                     }
                     else {
-                        html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+                        html += `<button formaction="/order" onclick="makeReservation(event,this)" class="hour" name="time" value="${i}">${i}:00</button>`;
                     }
                 }
             }
@@ -68,7 +68,6 @@ app.engine('hbs', hbs({
 }));
 app.set('view engine', 'hbs');
 
-
 app.use(session({
     key: 'restaurant.session.sid',
     secret: 'Lol',
@@ -76,8 +75,9 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(bodyParser.json())
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static('static'));
 
 

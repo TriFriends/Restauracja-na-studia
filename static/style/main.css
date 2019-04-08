@@ -10,6 +10,8 @@ nav {
     padding: 20px;
     background: black;
     color: white;
+    position: sticky;
+    top: 0%;
 }
 
 nav div.a {

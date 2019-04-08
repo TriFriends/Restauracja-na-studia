@@ -20,14 +20,9 @@ let contactSchema = new Schema({
     street: {
         type: String
     }
-}, 
-//ustalenie maksymalnej ilości dokumentów w kolekcji oraz rozmiaru w bajtach(wymagane)
-{
-        capped: {
-            size: 1024,
-            max: 1
-        }
-    })
+}
+    //ustalenie maksymalnej ilości dokumentów w kolekcji oraz rozmiaru w bajtach(wymagane)
+)
 
 //Utworzenie modelu na podstawie schematu
 //Model - jest to kolekcja w bazie danych typu NoSQL
