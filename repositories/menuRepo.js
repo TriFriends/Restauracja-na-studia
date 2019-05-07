@@ -18,7 +18,6 @@ class MenuRepository {
         return new Promise((resolve, reject) => {
             MenuModel.updateOne({ _id: id }, doc, (err, raw) => {
                 
-                //Jeśli podczas modyfikacji liczba dopasowanych dokumentów jest równa 0 to wyrzuca błąd
                 if (err || raw.n == 0) {
                     reject()
                 }

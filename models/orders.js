@@ -14,7 +14,14 @@ const orderSchema = new Schema({
         type: String,
         required: true
     },
-    user: userSchema
+    user: userSchema,
+    menuOrder: {
+        type: Object,
+        required: true,
+        default: {
+
+        }
+    }
 })
 
 exports.orderSchema = orderSchema

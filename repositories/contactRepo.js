@@ -13,8 +13,6 @@ class ContactRepo {
     static getAll() {
         return new Promise((resolve, reject) => {
             ContactModel.find({}, (err, contact) => {
-
-                //Wszędzie to err oznacza to samo, jeśli jest błąd jakiejś operacji na bazie danych to wtedy wyrzucamy błąd
                 if (err) {
                     reject()
                 }

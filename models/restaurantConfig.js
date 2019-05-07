@@ -16,7 +16,15 @@ let restaurantConfigSchema = new Schema({
     maxDayAhead: {
         type: Number
     }
-})
+},
+    //ustalenie maksymalnej ilości dokumentów w kolekcji
+    {
+        capped: {
+            size: 1024,
+            max: 1
+        }
+    }
+)
 
 //Utworzenie modelu na podstawie schematu
 const RestaurantConfig = mongoose.model('RestaurantConfig', restaurantConfigSchema)

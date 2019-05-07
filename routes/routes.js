@@ -20,7 +20,9 @@ router.get('/reset-password', pageController.getResetPasswordPage);
 router.get('/contact', pageController.getContactPage)
 router.post('/login/login-user', authController.loginUser);
 router.post('/registration/register-user', authController.registerUser);
+router.post('/order-dishes', MW.ensureisLogged, pageController.orderDishes);
 router.get('/logout', authController.logout)
+router.get('/orders', MW.ensureIsAdmin, pageController.getOrdersPage)
 router.get('/admin', MW.ensureIsAdmin, pageController.getAdminPage);
 
 router.post('/reset-password/reset', authController.resetPassword);

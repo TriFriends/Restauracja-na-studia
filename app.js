@@ -4,10 +4,18 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://admin:admin18@ds111065.mlab.com:11065/restaurant'
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/restaurant"
+//'mongodb://admin:admin18@ds111065.mlab.com:11065/restaurant'
 const DBConfig = require('./config/DBConfig')
 const PORT = 3000;
 const app = express();
+//update
+//wyłączenie crashowania się aplikacji przy wyrzucaniu własnych wyjątków !!!
+//bardzo ważne
+process.on('uncaughtException', function (err) {
+    console.error(err);
+    console.log("Node NOT Exiting...");
+});
 
 //Utworzenie obiektu klasy DBConfig i przekazanie mu adresu bazy danych
 let dbConnection = new DBConfig(MONGODB_URI)
@@ -42,14 +50,14 @@ app.engine('hbs', hbs({
                 else {
 
                     if (occupied) {
-                        html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00`;
+                        html += `<button onclick="event.preventDefault()" class="hour occupied" name="time" value="${i}">${i}:00`;
                         if (isAdmin) {
                             html += '<br/>' + reservuser;
                         }
                         html += '</button>';
                     }
                     else {
-                        html += `<button formaction="/order" class="hour" name="time" value="${i}">${i}:00</button>`;
+                        html += `<button formaction="/order" onclick="makeReservation(event,this)" class="hour" name="time" value="${i}">${i}:00</button>`;
                     }
                 }
             }
@@ -60,7 +68,6 @@ app.engine('hbs', hbs({
 }));
 app.set('view engine', 'hbs');
 
-
 app.use(session({
     key: 'restaurant.session.sid',
     secret: 'Lol',
@@ -68,9 +75,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(bodyParser.json())
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static('static'));
+
+
 
 app.use(flash());
 const mailer = require('./utils/mailer').init();
