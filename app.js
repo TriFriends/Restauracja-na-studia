@@ -50,7 +50,7 @@ app.engine('hbs', hbs({
                 else {
 
                     if (occupied) {
-                        html += `<button onclick="event.preventDefault()" class="hour occupied" name="time" value="${i}">${i}:00`;
+                        html += `<button formaction="/order" class="hour occupied" name="time" value="${i}">${i}:00`;
                         if (isAdmin) {
                             html += '<br/>' + reservuser;
                         }
